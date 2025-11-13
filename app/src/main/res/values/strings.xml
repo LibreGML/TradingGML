@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TradingGML</string>
+
+    <string name="shortcut_rule_short_label">🍥 交易纪律</string>
+    <string name="shortcut_rule_long_label">🍥 交易纪律</string>
+    <string name="shortcut_rule_disabled_message">🍥 交易纪律不可用</string>
+
+    <string name="shortcut_bird_short_label">🍉 飞行小鸟</string>
+    <string name="shortcut_bird_long_label">🍉 飞行小鸟</string>
+    <string name="shortcut_bird_disabled_message">🍉 飞行小鸟游戏不可用</string>
+
+    <string name="shortcut_note_short_label">🍟 临时笔记本</string>
+    <string name="shortcut_note_long_label">🍟 临时笔记本</string>
+    <string name="shortcut_note_disabled_message">🍟 临时笔记本不可用</string>
+
+    <string name="shortcut_passwd_short_label">✨ 密码记录器</string>
+    <string name="shortcut_passwd_long_label">✨ 密码记录器</string>
+    <string name="shortcut_passwd_disabled_message">✨ 密码记录器不可用</string>
+
+</resources>

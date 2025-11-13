@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/homebg"
+    tools:context=".plugins.FakeActivity">
+
+    <!-- 标题栏 -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="5dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="✧ 数据伪造 ✧*:･ﾟ"
+                android:textColor="#84A1FF"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:textSize="21sp"
+                android:paddingStart="20dp" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 伪造通话记录部分 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="20dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="伪造通话记录"
+                        android:textSize="16.5sp"
+                        android:textStyle="bold"
+                        android:textColor="#35A0FF"
+                        android:gravity="start"
+                        android:layout_marginBottom="6dp" />
+
+                    <View
+                        android:layout_width="130dp"
+                        android:layout_height="3dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/div" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="📞 电话号码"
+                        app:hintTextColor="#84A1FF"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="#84A1FF"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="#84A1FF"
+                        android:textColorHint="#84A1FF"
+                        android:layout_marginBottom="4dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_call_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
+                            android:maxLines="1"
+                            android:textColor="#0A1A55"
+                            android:textSize="13.5sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="⏱ 通话时长(秒)"
+                        app:hintTextColor="#84A1FF"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="#84A1FF"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="#84A1FF"
+                        android:textColorHint="#84A1FF"
+                        android:layout_marginBottom="4dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_call_duration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:textColor="#0A1A55"
+                            android:textSize="13.5sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 通话日期选择 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="📅 通话日期"
+                        app:hintTextColor="#84A1FF"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="#84A1FF"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:endIconMode="none"
+                        app:endIconTint="#84A1FF"
+                        android:textColorHint="#84A1FF"
+                        android:layout_marginBottom="4dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_call_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:inputType="none"
+                            android:maxLines="1"
+                            android:textColor="#0A1A55"
+                            android:textSize="13.5sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="通话类型"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="#2EAAFF"
+                        android:textSize="15sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_call_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_outgoing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="拨出"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/rb_incoming"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="呼入"
+                            android:layout_marginStart="16dp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_missed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="未接"
+                            android:layout_marginStart="16dp" />
+
+                    </RadioGroup>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_add_call_log"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="添加通话记录"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        app:cornerRadius="14dp"
+                        app:backgroundTint="#84A1FF"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 伪造短信记录部分 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="伪造短信记录"
+                        android:textSize="16.5sp"
+                        android:textStyle="bold"
+                        android:textColor="#35A0FF"
+                        android:gravity="start"
+                        android:layout_marginBottom="6dp" />
+
+                    <View
+                        android:layout_width="130dp"
+                        android:layout_height="3dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/div" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="📱 发送方号码"
+                        app:hintTextColor="#84A1FF"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="#84A1FF"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="#84A1FF"
+                        android:textColorHint="#84A1FF"
+                        android:layout_marginBottom="4dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_sms_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
+                            android:maxLines="1"
+                            android:textColor="#0A1A55"
+                            android:textSize="13.5sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="💬 短信内容"
+                        app:hintTextColor="#84A1FF"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="#84A1FF"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:endIconMode="none"
+                        app:endIconTint="#84A1FF"
+                        android:textColorHint="#84A1FF"
+                        android:layout_marginBottom="4dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_sms_body"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:minLines="3"
+                            android:textColor="#0A1A55"
+                            android:textSize="13.5sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 短信日期选择 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="📅 短信日期"
+                        app:hintTextColor="#84A1FF"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="#84A1FF"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:endIconMode="none"
+                        app:endIconTint="#84A1FF"
+                        android:textColorHint="#84A1FF"
+                        android:layout_marginBottom="4dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_sms_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:inputType="none"
+                            android:maxLines="1"
+                            android:textColor="#0A1A55"
+                            android:textSize="13.5sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="短信类型"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="#2EAAFF"
+                        android:textSize="15sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_sms_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_sent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已发送"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/rb_received"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已接收"
+                            android:layout_marginStart="16dp" />
+
+                    </RadioGroup>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_add_sms"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="添加短信记录"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        app:cornerRadius="14dp"
+                        app:backgroundTint="#84A1FF"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/text_secondary" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

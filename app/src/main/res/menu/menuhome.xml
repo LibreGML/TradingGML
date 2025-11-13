@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_rule"
+        android:title="🍥 交易纪律"
+         />
+    <item
+        android:id="@+id/action_note"
+        android:title="🍉 临时笔记"
+         />
+    <item
+        android:id="@+id/password"
+        android:title="🍟 密码管理"
+        />
+    <item
+        android:id="@+id/bird"
+        android:title="✨ 飞行小鸟"
+        />
+    <item
+        android:id="@+id/setting"
+        android:title="🛠️ 应用设置"
+        />
+</menu>

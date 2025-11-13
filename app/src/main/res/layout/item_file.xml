@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="23dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="9dp"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fileIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="📄"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_marginEnd="16dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fileNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="文件名.txt"
+                android:textSize="15sp"
+                android:textColor="#84A1FF"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/fileInfoText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.2 KB · 2023/05/15 14:30"
+                android:textSize="14sp"
+                android:textColor="#99A8E2"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/moreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            app:icon="@drawable/more"
+            app:iconTint="#84A1FF"
+            app:iconSize="26dp"
+            app:strokeWidth="0dp"
+            app:backgroundTint="@android:color/transparent"
+            android:clickable="true"
+            />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

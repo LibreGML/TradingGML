@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!--信息输入区域-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="12dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:alpha="0.72"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📋 补仓信息"
+                    android:textColor="#35A0FF"
+                    android:textSize="16.5sp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:layout_width="130dp"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/div" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="💰 初买价"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/firstBuyPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="📈 初买数/股"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/firstBuyQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="💵 补仓价"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/rebuyPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="📉 补仓数/股"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/rebuyQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="🧮 手续费(万分之)"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/commissionRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="🏵 印花税(%)"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/stampDutyRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="💳️ 过户费(%)"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/transferFeeRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:alpha="0.72"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🍎 计算结果"
+                    android:textColor="#35A0FF"
+                    android:textSize="16.5sp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:layout_width="130dp"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/div" />
+
+                <!-- 最终成本 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="最终成本"
+                        android:textColor="#2EAAFF"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/finalCostValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CNY"
+                        android:textColor="#00B5FF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- 当前盈亏 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="当前盈亏"
+                        android:textColor="#2EAAFF"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/currentProfitValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CNY"
+                        android:textColor="#00B5FF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- 目前总股数 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="目前总股数"
+                        android:textColor="#2EAAFF"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/totalQuantityValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="股"
+                        android:textColor="#00B5FF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</LinearLayout>

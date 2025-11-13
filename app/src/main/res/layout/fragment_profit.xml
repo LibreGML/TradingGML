@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!--信息输入区域-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="12dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:alpha="0.72"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📋 合约信息"
+                    android:textColor="#35A0FF"
+                    android:textSize="16.5sp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:layout_width="130dp"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/div" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/positionType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectionRequired="true"
+                    app:singleSelection="true"
+                    app:checkedButton="@id/buyButton"
+                    android:layout_marginBottom="15dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/sellButton"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="📉 卖出"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:strokeColor="@color/sell_border"
+                        app:strokeWidth="2dp"
+                        app:cornerRadius="14dp"
+                        android:backgroundTint="@color/sellbg"
+                        android:textColor="@color/sell_text" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buyButton"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="买入 📈"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:strokeColor="@color/buy_border"
+                        app:strokeWidth="2dp"
+                        app:cornerRadius="14dp"
+                        android:backgroundTint="@color/buybg"
+                        android:textColor="@color/buy_text" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="🗂️ 合约规模"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/contractSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="🎁 合约数量"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/quantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="⚖️ 杠杆倍数"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/lever"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="💵 开仓价格"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/entryPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="🪙 平仓价格"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/exitPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:alpha="0.72"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🍎 计算结果"
+                    android:textColor="#35A0FF"
+                    android:textSize="16.5sp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:layout_width="130dp"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/div" />
+
+                <!-- 保证金 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="占用保证金"
+                        android:textColor="#2EAAFF"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/marginValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="USD"
+                        android:textColor="#00B5FF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- 收益 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="收益"
+                        android:textColor="#2EAAFF"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/profitValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="USD"
+                        android:textColor="#00B5FF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- 收益率 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="收益率"
+                        android:textColor="#2EAAFF"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/roiValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="#00B5FF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/homebg"
+    android:id="@+id/rule">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="26dp">
+
+        <!-- 标题区域 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            android:backgroundTint="#91C8FF"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="｡･*.✧ GML合约守则 ✧.*･｡"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    />
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="12dp"
+                    android:background="#FFFFFF"
+                    android:alpha="0.8" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 1. 开仓 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            android:backgroundTint="@android:color/white"
+           >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#45ACFF"
+                        android:layout_marginEnd="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🌸 1. 开仓"
+                        android:textColor="#DE000000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 仅 重要撑压/多重指标共振/符合交易系统 挂单"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 禁止 市价单/凭感觉/情绪化/跟喊单"
+                    android:textColor="#FF6F6A"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 在 散户密集止损区 挂单"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 根据 影线+结构+ATR 设有效止损"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 盈亏比≥1:1，若有效止损过大则不开仓"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 据止损计算 仓位/杠杆"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 严格止盈止损，固定盈亏比被动开平仓"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 严禁抄底摸顶/逆势交易！"
+                    android:textColor="#FF6F6A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 小周期交易须顺应大周期趋势，否则轻仓短线"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 窄幅震荡/区间中部 禁止开仓"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 形态确认需等待收线，否则不做形态判定"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 交易周期 ≥ 15M"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 2. 风控 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            android:backgroundTint="@android:color/white"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#FF736D"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🍉 2. 风控"
+                        android:textColor="#DE000000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 本金限额3500 CNY"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 保持轻仓、低杠杆，每单仓位 ≤ 0.02手"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 严禁 浮亏加仓/抗单/撤销或扩大止损！"
+                    android:textColor="#FF6F6A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 浮盈加仓须呈递减金字塔式"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 距目标位已实现30％，可 设保利损/逐步减仓"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 单笔亏损严控在本金的2%"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 单损停2天，连损2次停2月，亏损本金15％ 停6月"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 无视单笔盈亏，禁止报复性交易！"
+                    android:textColor="#FF6F6A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 达成每月盈利目标后强制休息"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 禁止持续性盯盘，自动止盈止损"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 3. 频率 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            android:backgroundTint="@android:color/white"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#9D7AFF"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🧊 3. 频率"
+                        android:textColor="#DE000000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 仅在出现明确信号时开仓！"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 节假日、每周五、每年2月1日/6月18日 休息"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 禁止 23:30后开仓/熬夜或通宵盯盘"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 重大数据/政策公布前 空仓观望"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 4. 标的白名单 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            android:backgroundTint="@android:color/white"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#FFE040"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🍰 4. 标的白名单"
+                        android:textColor="#DE000000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="SPX 500"
+                        android:textColor="#8A000000"
+                        android:textSize="14sp"
+                        android:background="@drawable/tag_background"
+                        android:padding="8dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="DAX 40"
+                        android:textColor="#8A000000"
+                        android:textSize="14sp"
+                        android:background="@drawable/tag_background"
+                        android:padding="8dp"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="XAUUSD"
+                        android:textColor="#8A000000"
+                        android:textSize="14sp"
+                        android:background="@drawable/tag_background"
+                        android:padding="8dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="WTI"
+                        android:textColor="#8A000000"
+                        android:textSize="14sp"
+                        android:background="@drawable/tag_background"
+                        android:padding="8dp"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="EURUSD"
+                        android:textColor="#8A000000"
+                        android:textSize="14sp"
+                        android:background="@drawable/tag_background"
+                        android:padding="8dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="USDJPY"
+                        android:textColor="#8A000000"
+                        android:textSize="14sp"
+                        android:background="@drawable/tag_background"
+                        android:padding="8dp"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="BTCUSD"
+                        android:textColor="#8A000000"
+                        android:textSize="14sp"
+                        android:background="@drawable/tag_background"
+                        android:padding="8dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="NVDA/MSFT"
+                        android:textColor="#8A000000"
+                        android:textSize="14sp"
+                        android:background="@drawable/tag_background"
+                        android:padding="8dp"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 5. 复盘 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            android:backgroundTint="@android:color/white"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@color/accent_green"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🍎 5. 复盘"
+                        android:textColor="#DE000000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 是否遵循系统进行交易，是否遵守纪律，是否受情绪影响"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 杠杆/仓位/止盈止损是否合理"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 若亏损，则应反思并改进系统，并记录此次交易具体行情"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 回顾并分析近日行情，包括技术面/基本面"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• 分析目前行情与预期，并以此制定下步交易计划"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.3" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 备注卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#FF6E68"
+            app:strokeWidth="1dp"
+            android:backgroundTint="#F5DBDA"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="#FF6969"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💡 交易提示"
+                        android:textColor="#DE000000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="散户止损集中于关键撑压附近，机构常触发明显止损区以获取流动性。应在原本自己想止损的位置挂单入场，并结合ATR和整体结构设有效止损。"
+                    android:textColor="#8A000000"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.4"
+                    android:fontFamily="sans-serif-medium" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

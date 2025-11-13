@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/homebg"
+    android:id="@+id/note">
+
+    <!-- 顶部操作栏 -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="5dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp">
+
+<com.google.android.material.tabs.TabLayout
+    android:id="@+id/tabLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_marginHorizontal="10dp"
+    android:background="@android:color/transparent"
+    app:tabRippleColor="@android:color/transparent"
+    app:tabTextColor="#84A1FF"
+    app:tabSelectedTextColor="#59BDFF"
+    app:tabIndicatorColor="#59BDFF"
+    app:tabPaddingStart="0dp"
+    app:tabPaddingEnd="0dp"
+    app:tabPaddingTop="0dp"
+    app:tabPaddingBottom="0dp"
+    app:tabIndicatorHeight="2dp"
+    app:tabIndicatorFullWidth="false"
+    >
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="编辑" />
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="预览" />
+</com.google.android.material.tabs.TabLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    app:icon="@drawable/list"
+                    app:iconTint="#84A1FF"
+                    app:iconSize="26dp"
+                    app:backgroundTint="@android:color/transparent"
+                    android:padding="0dp"
+                    android:layout_marginStart="4dp" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    app:icon="@drawable/save"
+                    app:iconTint="#84A1FF"
+                    app:iconSize="26dp"
+                    app:backgroundTint="@android:color/transparent"
+                    android:clickable="true"
+                    android:padding="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="4dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 文本编辑区域 -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="3dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <EditText
+            android:id="@+id/notetitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="📌 标题"
+            android:gravity="center_vertical|start"
+            android:padding="9dp"
+            android:paddingStart="22dp"
+            android:textSize="15.5sp"
+            android:textStyle="bold"
+            android:textColor="#1C1B1F"
+            android:textColorHint="#49454F"
+            android:background="@android:color/transparent"
+            android:clipToOutline="true"
+            android:layout_marginVertical="5dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColorHighlight="#59BDFF" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="3dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <!-- 使用 ViewFlipper 切换编辑和预览视图 -->
+        <ViewFlipper
+            android:id="@+id/viewFlipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- 编辑视图 -->
+            <ScrollView
+                android:id="@+id/editScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <EditText
+                    android:id="@+id/noteEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:hint="📝 记录一下日常心得叭~"
+                    android:gravity="top|start"
+                    android:padding="14dp"
+                    android:textSize="14sp"
+                    android:textColor="#1C1B1F"
+                    android:textColorHint="#49454F"
+                    android:textColorHighlight="#59BDFF"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="false"
+                    android:background="@android:color/transparent"
+                    android:clipToOutline="true"
+                    android:maxLength="1000000"
+                    />
+            </ScrollView>
+
+            <!-- 预览视图 -->
+            <ScrollView
+                android:id="@+id/previewScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/previewTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="14dp"
+                    android:textSize="14sp"
+                    android:textColor="#1C1B1F"
+                    android:letterSpacing="0.1"
+                    android:lineSpacingExtra="8dp" />
+            </ScrollView>
+        </ViewFlipper>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>
