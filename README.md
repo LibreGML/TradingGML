@@ -28,6 +28,9 @@ TradingGML是一款专为金融交易者打造的综合性工具应用，旨在�
 - **USDT买卖计算器**: 计算USDT交易的建议手数
 - **股票补仓计算器**: 计算股票补仓后的平均成本和盈亏情况
 - 支持多空双向计算，满足不同交易策略需求
+![num](https://github.com/user-attachments/assets/9a500d55-1b8c-4834-be9c-e3c6b13db4cb)
+
+
 
 ### 3. 临时笔记系统
 - 支持Markdown格式的笔记编辑和预览
@@ -41,6 +44,8 @@ TradingGML是一款专为金融交易者打造的综合性工具应用，旨在�
 - 提供导入导出功能，方便数据备份和迁移
 - 搜索功能快速定位账户信息
 - 支持增删改查操作
+![password](https://github.com/user-attachments/assets/c5e43027-7035-4515-861a-0be09c8d6627)
+
 
 ### 5. 飞行小鸟游戏
 - 内置经典Flappy Bird游戏
@@ -52,11 +57,12 @@ TradingGML是一款专为金融交易者打造的综合性工具应用，旨在�
 - 可自定义时间、号码、内容等参数
 - 适用于测试或其他特殊用途
 - 支持多种短信和通话类型
+![fake](https://github.com/user-attachments/assets/44e87ea1-7c7f-4201-9bab-9e57bd85883f)
+
 
 ### 7. 桌面小部件
-- 显示与伴侣的纪念日信息
-- 提供快捷通知功能
-- 美观的UI设计，与系统主题协调
+![widget](https://github.com/user-attachments/assets/bcf56f15-99e1-4cf8-ac0c-1ef09abc1b75)
+
 
 ### 8. 交易规则
 - 详细展示交易守则和纪律要求
