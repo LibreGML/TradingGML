@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_rule"
-        android:title="🍥 交易纪律"
+        android:title="📜 基本法"
          />
     <item
         android:id="@+id/action_note"
@@ -11,7 +11,7 @@
          />
     <item
         android:id="@+id/password"
-        android:title="🍟 密码管理"
+        android:title="🔐 密码管理"
         />
     <item
         android:id="@+id/bird"

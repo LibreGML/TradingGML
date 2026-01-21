@@ -8,13 +8,10 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import tz.yx.gml.homefrag.MainActivity
-import java.util.*
+import java.util.Calendar
 
 class MyNightWidgetProvider : AppWidgetProvider() {
 
@@ -27,7 +24,7 @@ class MyNightWidgetProvider : AppWidgetProvider() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(
                     CHANNEL_ID,
-                    "温馨提醒",
+                    "   温馨提醒",
                     NotificationManager.IMPORTANCE_DEFAULT
                 ).apply {
                     description = "来自桌面小部件的提醒"
@@ -110,8 +107,18 @@ class MyNightWidgetProvider : AppWidgetProvider() {
     ) {
         val views = RemoteViews(context.packageName, R.layout.widget_layout)
 
-        val days = calculateDays()
-        views.setTextViewText(R.id.tv_date_info, "2021年2月1日莹轩诞生啦！陪伴了我 $days 天！")
+        val currentDate = Calendar.getInstance()
+        val currentMonth = currentDate.get(Calendar.MONTH) + 1
+        val currentDay = currentDate.get(Calendar.DAY_OF_MONTH)
+
+        val text = if (currentMonth == 2 && currentDay == 1) {
+            " 莹轩今天生日啦！！！莹联万岁！！！"
+        } else {
+            val days = calculateDays()
+            "2021年2月1日莹轩诞生啦！陪伴了我 $days 天！"
+        }
+        
+        views.setTextViewText(R.id.tv_date_info, text)
 
         val clickIntent = Intent(context, MyNightWidgetProvider::class.java).apply {
             action = ACTION_SHOW_NOTIFICATION

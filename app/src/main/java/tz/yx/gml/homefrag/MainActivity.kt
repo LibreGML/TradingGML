@@ -12,21 +12,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.textview.MaterialTextView
-import tz.yx.gml.plugins.BirdActivity
-import tz.yx.gml.note.NoteActivity
 import tz.yx.gml.R
 import tz.yx.gml.databinding.ActivityMainBinding
+import tz.yx.gml.note.NoteActivity
 import tz.yx.gml.passwd.PasswdActivity
+import tz.yx.gml.plugins.BirdActivity
 import tz.yx.gml.plugins.FakeActivity
 import tz.yx.gml.utils.FingerprintManager
-import java.lang.reflect.Field
 
 class MainActivity : AppCompatActivity() {
 
@@ -152,7 +148,7 @@ private fun setupViewPager() {
     private fun toNotePage() { startActivity(Intent(this, NoteActivity::class.java)) }
 
     private fun toRulePage() {
-        val intent = Intent(this, RuleActivity::class.java)
+        val intent = Intent(this, YxActivity::class.java)
         val options = androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation(this)
         startActivity(intent, options.toBundle())
     }
