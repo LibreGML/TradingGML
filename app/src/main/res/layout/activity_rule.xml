@@ -6,17 +6,93 @@
         android:background="#EFF2FF"
         android:id="@+id/rule">
 
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="6dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/hometitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="✧ 莹钞钱包 ✧*:･ﾟ"
+                    android:textColor="#84A1FF"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:textSize="21sp"
+                    android:paddingStart="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/exorimport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    app:icon="@drawable/ic_timer"
+                    app:iconTint="#84A1FF"
+                    app:iconSize="32dp"
+                    app:strokeWidth="0dp"
+                    app:backgroundTint="@android:color/transparent"
+                    android:clickable="true"
+                    android:paddingHorizontal="0dp" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/banhistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    app:icon="@drawable/history"
+                    app:iconTint="#84A1FF"
+                    app:iconSize="29dp"
+                    app:strokeWidth="0dp"
+                    app:backgroundTint="@android:color/transparent"
+                    android:clickable="true"
+                    android:paddingHorizontal="0dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/currencySelectorButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    app:icon="@drawable/fx"
+                    app:iconTint="#84A1FF"
+                    app:iconSize="30dp"
+                    app:strokeWidth="0dp"
+                    app:backgroundTint="@android:color/transparent"
+                    android:clickable="true"
+                    android:paddingHorizontal="0dp" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tozero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    app:icon="@drawable/tozero"
+                    app:iconTint="#84A1FF"
+                    app:iconSize="29dp"
+                    app:strokeWidth="0dp"
+                    app:backgroundTint="@android:color/transparent"
+                    android:layout_marginEnd="5dp"
+                    android:clickable="true"
+                    android:paddingHorizontal="0dp" />
+        </LinearLayout>
+
+
         <!-- 顶部钱包信息卡片 -->
         <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginBottom="12dp"
                 android:layout_marginHorizontal="10dp"
                 app:cardCornerRadius="24dp"
@@ -30,70 +106,89 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingHorizontal="24dp"
                     android:paddingVertical="24dp">
-
-                <!-- 莹钞余额 - 大字体 -->
-                <TextView
-                        android:id="@+id/yuanPangBalance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0 Ƶ"
-                        android:textColor="#01020F"
-                        android:textSize="40sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center_horizontal" />
-
 
                 <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_gravity="center"
-                        android:layout_marginTop="6dp">
+                        android:paddingHorizontal="30dp"
+                        android:paddingVertical="25dp"
+                        android:background="@drawable/glow_text_background">
 
-                    <!-- 支出按钮 -->
-                    <com.google.android.material.button.MaterialButton
-                            android:id="@+id/spendButton"
+                    <!-- 莹钞余额 - 大字体 -->
+                    <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/Widget.Material3.Button.IconButton.Filled"
-                            android:backgroundTint="@color/mtrl_textinput_default_box_stroke_color"
-                            app:cornerRadius="24dp"
-                            app:icon="@drawable/ic_shopping_cart"
-                            android:layout_marginEnd="12dp" />
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical">
 
-                    <com.google.android.material.button.MaterialButton
-                            android:id="@+id/addButton"
+                        <TextView
+                                android:id="@+id/yuanPangBalance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0 Ƶ"
+                                android:textColor="#01020F"
+                                android:textSize="50sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="10dp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/Widget.Material3.Button.IconButton.Filled"
-                            app:cornerRadius="24dp"
-                            app:icon="@android:drawable/ic_input_add"
-                            android:backgroundTint="@color/mtrl_textinput_default_box_stroke_color"
-                            android:layout_marginHorizontal="6dp" />
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp">
 
-                    <com.google.android.material.button.MaterialButton
-                            android:id="@+id/saveButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            style="@style/Widget.Material3.Button.IconButton.Filled"
-                            android:backgroundTint="@color/mtrl_textinput_default_box_stroke_color"
-                            app:cornerRadius="24dp"
-                            app:icon="@drawable/atomic"
-                            android:layout_marginStart="12dp" />
+                        <!-- 支出按钮 -->
+                        <com.google.android.material.button.MaterialButton
+                                android:id="@+id/spendButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/Widget.Material3.Button.IconButton.Filled"
+                                android:backgroundTint="@color/mtrl_textinput_default_box_stroke_color"
+                                app:cornerRadius="24dp"
+                                app:icon="@drawable/ic_shopping_cart"
+                                android:layout_marginEnd="12dp" />
 
-                    <!-- 查看储蓄记录按钮 -->
-                    <com.google.android.material.button.MaterialButton
-                            android:id="@+id/viewSavingsRecordsButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            style="@style/Widget.Material3.Button.IconButton.Filled"
-                            android:backgroundTint="@color/mtrl_textinput_default_box_stroke_color"
-                            app:cornerRadius="24dp"
-                            app:icon="@drawable/ic_book"
-                            android:layout_marginStart="12dp" />
+                        <com.google.android.material.button.MaterialButton
+                                android:id="@+id/addButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/Widget.Material3.Button.IconButton.Filled"
+                                app:cornerRadius="24dp"
+                                app:icon="@android:drawable/ic_input_add"
+                                android:backgroundTint="@color/mtrl_textinput_default_box_stroke_color"
+                                android:layout_marginHorizontal="6dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                                android:id="@+id/saveButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/Widget.Material3.Button.IconButton.Filled"
+                                android:backgroundTint="@color/mtrl_textinput_default_box_stroke_color"
+                                app:cornerRadius="24dp"
+                                app:icon="@drawable/atomic"
+                                android:layout_marginStart="12dp" />
+
+                        <!-- 查看储蓄记录按钮 -->
+                        <com.google.android.material.button.MaterialButton
+                                android:id="@+id/viewSavingsRecordsButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/Widget.Material3.Button.IconButton.Filled"
+                                android:backgroundTint="@color/mtrl_textinput_default_box_stroke_color"
+                                app:cornerRadius="24dp"
+                                app:icon="@drawable/ic_book"
+                                android:layout_marginStart="12dp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

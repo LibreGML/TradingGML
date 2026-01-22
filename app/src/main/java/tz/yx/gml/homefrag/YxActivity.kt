@@ -4,7 +4,10 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.LinearLayout
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -16,6 +19,12 @@ class YxActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRuleBinding
     private lateinit var sharedPreferences: SharedPreferences
+
+    // 添加货币类型枚举
+    companion object {
+        const val CURRENCY_YUAN_PANG = "yuan_pang"
+        const val CURRENCY_CNY = "cny"
+    }
 
     // 判断是否为双倍莹钞日（每月1日）
     private fun isDoubleYuanPangDay(): Boolean {
@@ -30,9 +39,18 @@ class YxActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         try {
             binding = ActivityRuleBinding.inflate(layoutInflater)
             setContentView(binding.root)
+            
+            enableEdgeToEdge()
+            ViewCompat.setOnApplyWindowInsetsListener(binding.rule) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
+
 
             // 初始化SharedPreferences
             sharedPreferences = getSharedPreferences("YxData", MODE_PRIVATE)
@@ -66,8 +84,31 @@ class YxActivity : AppCompatActivity() {
         val totalEarned = sharedPreferences.getInt("total_yuan_pang_earned", 0)
         val penalties = sharedPreferences.getInt("penalty_count", 0)
 
-        binding.yuanPangBalance.text = "$balance Ƶ"
-        binding.totalYuanPang.text = "总计获得: $totalEarned Ƶ"
+        // 获取当前选择的货币类型，默认为莹钞
+        val selectedCurrency = sharedPreferences.getString("selected_currency", CURRENCY_YUAN_PANG)
+            ?: CURRENCY_YUAN_PANG
+
+        // 根据选择的货币类型显示不同的数值和单位
+        val displayBalance = when (selectedCurrency) {
+            CURRENCY_CNY -> {
+                val convertedBalance = (balance * 0.47).toInt()
+                "$convertedBalance ¥"
+            }
+
+            else -> "$balance Ƶ"
+        }
+
+        val displayTotalEarned = when (selectedCurrency) {
+            CURRENCY_CNY -> {
+                val convertedTotal = (totalEarned * 0.47).toInt()
+                "总计获得: $convertedTotal ¥"
+            }
+
+            else -> "总计获得: $totalEarned Ƶ"
+        }
+
+        binding.yuanPangBalance.text = displayBalance
+        binding.totalYuanPang.text = displayTotalEarned
         binding.penaltyCount.text = "违规次数: $penalties 次"
     }
 
@@ -90,8 +131,59 @@ class YxActivity : AppCompatActivity() {
         binding.viewSavingsRecordsButton.setOnClickListener {
             showSavingsRecords()
         }
+
+        // 添加货币选择按钮的点击事件
+        binding.currencySelectorButton.setOnClickListener {
+            showCurrencySelectorPopup(it)
+        }
+        
+        // 添加清空记录按钮的点击事件
+        binding.tozero.setOnClickListener {
+            showClearAllRecordsDialog()
+        }
+        
+        // 添加违规历史按钮的点击事件
+        binding.banhistory.setOnClickListener {
+            showBanHistoryDialog()
+        }
     }
 
+    private fun showCurrencySelectorPopup(anchorView: android.view.View) {
+        val popupMenu = android.widget.PopupMenu(this, anchorView)
+
+        // 添加菜单项
+        val yuanPangItem = popupMenu.menu.add("莹钞 (Ƶ)")
+        val cnyItem = popupMenu.menu.add("人民币 (¥)")
+
+        // 设置点击监听器
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.title.toString()) {
+                "莹钞 (Ƶ)" -> {
+                    updateCurrencyDisplay(CURRENCY_YUAN_PANG)
+                    true
+                }
+
+                "人民币 (¥)" -> {
+                    updateCurrencyDisplay(CURRENCY_CNY)
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        popupMenu.show()
+    }
+
+    private fun updateCurrencyDisplay(currencyType: String) {
+        // 保存当前选择的货币类型
+        val editor = sharedPreferences.edit()
+        editor.putString("selected_currency", currencyType)
+        editor.apply()
+
+        // 重新加载数据显示
+        loadData()
+    }
 
     private fun setupOrdinanceClickEvents() {
         // 创建法令条目
@@ -156,6 +248,18 @@ class YxActivity : AppCompatActivity() {
 
         val editor = sharedPreferences.edit()
         editor.putStringSet("violated_ordinances", violatedOrdinances)
+        
+        // 更新详细违规记录的状态为已完成
+        val detailedViolationKey = "violation_detail_$ordinanceNumber"
+        val violationDetail = sharedPreferences.getString(detailedViolationKey, null)
+        if (violationDetail != null) {
+            val parts = violationDetail.split(":")
+            if (parts.size >= 2) {
+                val timestamp = parts[0]
+                val updatedDetail = "$timestamp:completed" // completed表示已完成处罚
+                editor.putString(detailedViolationKey, updatedDetail)
+            }
+        }
 
         editor.apply()
 
@@ -194,12 +298,17 @@ class YxActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putInt("penalty_count", currentPenalties + 1)
 
-        // 保存违规记录
+        // 保存违规记录，包含违规时间戳
         val violatedOrdinances =
             sharedPreferences.getStringSet("violated_ordinances", mutableSetOf())?.toMutableSet()
                 ?: mutableSetOf()
         violatedOrdinances.add("ordinance_$ordinanceNumber")
         editor.putStringSet("violated_ordinances", violatedOrdinances)
+        
+        // 保存详细的违规记录，包括时间戳和处罚状态
+        val detailedViolationKey = "violation_detail_$ordinanceNumber"
+        val violationDetail = "${System.currentTimeMillis()}:pending" // pending表示待完成处罚
+        editor.putString(detailedViolationKey, violationDetail)
 
         // 记录违规时间
         editor.putLong("last_violation_time", System.currentTimeMillis())
@@ -1645,6 +1754,146 @@ class YxActivity : AppCompatActivity() {
             sharedPreferences.getStringSet("savings_records", mutableSetOf()) ?: mutableSetOf()
         if (savingsRecords.isNotEmpty()) {
             processExpiredSavings(savingsRecords)
+        }
+    }
+    
+    // 新增：显示清空所有记录的对话框
+    private fun showClearAllRecordsDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("清空所有记录")
+            .setMessage("您确定要清空所有莹钞余额、违规记录和储蓄记录吗？此操作不可恢复！")
+            .setPositiveButton("确认清空") { _, _ ->
+                clearAllRecords()
+            }
+            .setNegativeButton("取消", null)
+            .show()
+    }
+    
+    // 新增：清空所有记录
+    private fun clearAllRecords() {
+        val editor = sharedPreferences.edit()
+        
+        // 清空莹钞余额相关
+        editor.putInt("yuan_pang_balance", 0)
+        editor.putInt("total_yuan_pang_earned", 0)
+        
+        // 清空违规记录相关
+        editor.putInt("penalty_count", 0)
+        editor.putLong("last_violation_time", 0)
+        editor.putStringSet("violated_ordinances", mutableSetOf())
+        
+        // 清空所有详细的违规记录
+        for (i in 1..16) { // 假设法令总数为16
+            val detailedViolationKey = "violation_detail_$i"
+            editor.remove(detailedViolationKey)
+        }
+        
+        // 清空储蓄记录相关
+        editor.putStringSet("savings_records", mutableSetOf())
+        
+        // 清空其他可能的相关记录
+        editor.putInt("abstinence_cycle_progress", 0)
+        editor.putInt("abstinence_accumulated_reward", 0)
+        editor.putInt("fitness_streak", 0)
+        editor.putInt("last_fitness_date", 0)
+        
+        // 重置固定奖励领取记录
+        editor.putInt("last_fixed_reward_year", 0)
+        editor.putInt("last_fixed_reward_month", 0)
+        
+        editor.apply()
+        
+        loadData() // 更新UI显示
+        updateOrdinanceStatus() // 更新法令状态
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("清空完成")
+            .setMessage("所有记录已清空，账户已归零")
+            .setPositiveButton("确定", null)
+            .show()
+    }
+    
+    // 新增：显示违规历史记录对话框
+    private fun showBanHistoryDialog() {
+        // 获取所有曾经违规的记录（包括已完成的）
+        val allOrdinanceNumbers = (1..16) // 假设法令总数为16
+        val banHistoryList = mutableListOf<String>()
+        
+        for (i in allOrdinanceNumbers) {
+            val detailedViolationKey = "violation_detail_$i"
+            val violationDetail = sharedPreferences.getString(detailedViolationKey, null)
+            
+            if (violationDetail != null) {
+                val parts = violationDetail.split(":")
+                if (parts.size >= 2) {
+                    val timestamp = parts[0].toLong()
+                    val status = parts[1]
+                    val ordinanceText = getOrdinanceTextByNumber(i)
+                    
+                    val violationDate = try {
+                        java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
+                            .format(java.util.Date(timestamp))
+                    } catch (e: Exception) {
+                        "未知时间"
+                    }
+                    
+                    val statusText = if (status == "completed") "已完成处罚" else "待完成处罚"
+                    
+                    banHistoryList.add(
+                        "法令编号: $i\n" +
+                        "违规时间: $violationDate\n" +
+                        "处罚状态: $statusText\n" +
+                        "法令内容: $ordinanceText"
+                    )
+                }
+            }
+        }
+        
+        if (banHistoryList.isEmpty()) {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("违规历史记录")
+                .setMessage("暂无违规记录")
+                .setPositiveButton("确定", null)
+                .show()
+            return
+        }
+        
+        val banHistoryArray = banHistoryList.toTypedArray()
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("违规历史记录")
+            .setItems(banHistoryArray) { _, _ ->
+                // 点击项目不做任何操作
+            }
+            .setPositiveButton("确定", null)
+            .show()
+    }
+    
+    // 新增：根据法令编号获取法令文本
+    private fun getOrdinanceTextByNumber(number: Int): String {
+        val ordinances = listOf(
+            "誓死捍卫自己的基本人权与自由！自己拥有对自我命运的绝对主权！",
+            "本人对自身婚姻事务拥有绝对且排他的最终决定权。是否结婚、与谁结婚、何时结婚均由本人独立判断。",
+            "严禁一切形式的占卜、算命、宗教及封建迷信活动与信仰。违者罚跑800米一圈，20个引体向上，罚款1000元。",
+            "坚持丁克主义，永久性禁止生育后代，违者罚款200000元，罚跑2次1200米。",
+            "永久性彻底禁止一切投机与赌博行为，严禁交易个股、期货、期权、外汇、加密货币等。违者罚跑2次1200米，2组20个引体向上。",
+            "严禁购买任何加密货币、稳定币、NFT等链上资产。违者罚跑2次1200米，3组20个引体向上。",
+            "严禁以任何形式为任何第三方的债务提供担保、增信或承诺承担连带责任。违者罚跑1次1200米，2组20个引体向上。",
+            "原则上严禁借入资金，借入金额不得超过上月基本生活费的两倍。违者罚跑1次1200米。",
+            "原则上严禁借出资金，单笔出借金额超过自身月收入的2倍，必须严格遵循《GML借款合同框架》。违者罚跑800米一圈，10个引体向上。",
+            "严禁将生活费及预留的应急资金用于任何风险投资、交易、出借。违者罚跑2次1200米，2组20个引体向上。",
+            "坚决维护个人财产所有权及绝对处分权，禁止让渡于他人。违者罚跑1200米一圈，20个引体向上。",
+            "严禁吸烟、吸毒。违者罚款10000元，罚跑2次1200米，3组20个引体向上。",
+            "严禁在国内平台发表任何可能被认定为煽动分裂、颠覆或传播严重谣言的内容。违者罚款500元，强制断网5小时。",
+            "严禁在婚姻关系存续期间出轨、嫖娼。违者罚跑2次1200米，2组20个引体向上，20个仰卧起坐，罚款10000元。",
+            "禁止购买任何游戏内虚拟物品、代币或服务，即禁止游戏充值，违者罚跑800米，20个仰卧起坐。",
+            "严禁在任何网络平台，进行打赏、刷礼物、充电等付费活动，违者罚跑1000米，40个仰卧起坐。"
+        )
+        
+        return if (number > 0 && number <= ordinances.size) {
+            ordinances[number - 1]
+        } else {
+            "未知法令"
         }
     }
 
