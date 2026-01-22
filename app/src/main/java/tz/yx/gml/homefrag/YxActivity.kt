@@ -2,23 +2,32 @@ package tz.yx.gml.homefrag
 
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import tz.yx.gml.R
 import tz.yx.gml.databinding.ActivityRuleBinding
+import tz.yx.gml.utils.DataExportImportUtils
 import kotlin.random.Random
+
 
 class YxActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRuleBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var dataExportImportUtils: DataExportImportUtils
+    private lateinit var importFileLauncher: ActivityResultLauncher<String>
 
     // 添加货币类型枚举
     companion object {
@@ -43,7 +52,7 @@ class YxActivity : AppCompatActivity() {
         try {
             binding = ActivityRuleBinding.inflate(layoutInflater)
             setContentView(binding.root)
-            
+
             enableEdgeToEdge()
             ViewCompat.setOnApplyWindowInsetsListener(binding.rule) { v, insets ->
                 val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -52,8 +61,18 @@ class YxActivity : AppCompatActivity() {
             }
 
 
+            // 初始化文件选择器
+            importFileLauncher =
+                registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                    uri?.let { selectedUri ->
+                        handleImportFile(selectedUri)
+                    }
+                }
+
             // 初始化SharedPreferences
             sharedPreferences = getSharedPreferences("YxData", MODE_PRIVATE)
+            dataExportImportUtils = DataExportImportUtils(this)
+
 
             // 加载数据
             loadData()
@@ -107,12 +126,17 @@ class YxActivity : AppCompatActivity() {
             else -> "总计获得: $totalEarned Ƶ"
         }
 
+        binding.yuanPangBalance.typeface = Typeface.create("sans-serif-black", Typeface.NORMAL)
         binding.yuanPangBalance.text = displayBalance
         binding.totalYuanPang.text = displayTotalEarned
-        binding.penaltyCount.text = "违规次数: $penalties 次"
+        binding.penaltyCount.text = "违法次数: $penalties 次"
     }
 
     private fun setupListeners() {
+        binding.walletname.setOnClickListener {
+            showMyPicture()
+        }
+
         binding.spendButton.setOnClickListener {
             showSpendDialog()
         }
@@ -136,16 +160,23 @@ class YxActivity : AppCompatActivity() {
         binding.currencySelectorButton.setOnClickListener {
             showCurrencySelectorPopup(it)
         }
-        
+
         // 添加清空记录按钮的点击事件
         binding.tozero.setOnClickListener {
             showClearAllRecordsDialog()
         }
-        
-        // 添加违规历史按钮的点击事件
+
+        // 添加违法历史按钮的点击事件
         binding.banhistory.setOnClickListener {
             showBanHistoryDialog()
         }
+
+        // 添加导出导入按钮的点击事件
+        binding.exorimport.setOnClickListener {
+            showExportImportBottomSheet()
+        }
+
+
     }
 
     private fun showCurrencySelectorPopup(anchorView: android.view.View) {
@@ -207,10 +238,10 @@ class YxActivity : AppCompatActivity() {
         val ordinanceKey = "ordinance_$ordinanceNumber"
 
         if (currentViolatedOrdinances.contains(ordinanceKey)) {
-            // 如果已违规，询问是否取消违规
+            // 如果已违法，询问是否取消违法
             showCancelViolationConfirmation(ordinanceNumber, textView, statusIcon)
         } else {
-            // 如果未违规，标记为违规
+            // 如果未违法，标记为违法
             showViolationConfirmation(ordinanceNumber, textView, statusIcon)
         }
     }
@@ -221,8 +252,8 @@ class YxActivity : AppCompatActivity() {
         statusIcon: android.widget.ImageView
     ) {
         MaterialAlertDialogBuilder(this)
-            .setTitle("取消违规标记")
-            .setMessage("您已完成惩罚，是否取消此法令的违规标记？")
+            .setTitle("取消违法标记")
+            .setMessage("您已完成惩罚，是否取消此法令的违法标记？")
             .setPositiveButton("确认取消") { _, _ ->
                 cancelViolation(ordinanceNumber, textView, statusIcon)
             }
@@ -240,7 +271,7 @@ class YxActivity : AppCompatActivity() {
         statusIcon.setColorFilter(Color.parseColor("#388E3C"))
         textView.setTextColor(getColor(android.R.color.secondary_text_light))
 
-        // 更新数据 - 仅移除违规记录，不改变违规次数
+        // 更新数据 - 仅移除违法记录，不改变违法次数
         val violatedOrdinances =
             sharedPreferences.getStringSet("violated_ordinances", mutableSetOf())?.toMutableSet()
                 ?: mutableSetOf()
@@ -248,8 +279,8 @@ class YxActivity : AppCompatActivity() {
 
         val editor = sharedPreferences.edit()
         editor.putStringSet("violated_ordinances", violatedOrdinances)
-        
-        // 更新详细违规记录的状态为已完成
+
+        // 更新详细违法记录的状态为已完成
         val detailedViolationKey = "violation_detail_$ordinanceNumber"
         val violationDetail = sharedPreferences.getString(detailedViolationKey, null)
         if (violationDetail != null) {
@@ -273,8 +304,8 @@ class YxActivity : AppCompatActivity() {
         statusIcon: android.widget.ImageView
     ) {
         MaterialAlertDialogBuilder(this)
-            .setTitle("确认违规")
-            .setMessage("您确定要标记此法令违规吗？法令编号：$ordinanceNumber")
+            .setTitle("确认违法")
+            .setMessage("您确定要标记此法令违法吗？法令编号：$ordinanceNumber")
             .setPositiveButton("确认") { _, _ ->
                 recordViolation(ordinanceNumber, textView, statusIcon)
             }
@@ -298,19 +329,19 @@ class YxActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putInt("penalty_count", currentPenalties + 1)
 
-        // 保存违规记录，包含违规时间戳
+        // 保存违法记录，包含违法时间戳
         val violatedOrdinances =
             sharedPreferences.getStringSet("violated_ordinances", mutableSetOf())?.toMutableSet()
                 ?: mutableSetOf()
         violatedOrdinances.add("ordinance_$ordinanceNumber")
         editor.putStringSet("violated_ordinances", violatedOrdinances)
-        
-        // 保存详细的违规记录，包括时间戳和处罚状态
+
+        // 保存详细的违法记录，包括时间戳和处罚状态
         val detailedViolationKey = "violation_detail_$ordinanceNumber"
         val violationDetail = "${System.currentTimeMillis()}:pending" // pending表示待完成处罚
         editor.putString(detailedViolationKey, violationDetail)
 
-        // 记录违规时间
+        // 记录违法时间
         editor.putLong("last_violation_time", System.currentTimeMillis())
 
         editor.apply()
@@ -325,12 +356,12 @@ class YxActivity : AppCompatActivity() {
             claimFixedReward()
         }
 
-        // 无违规奖励
+        // 无违法奖励
         binding.claimNoViolationReward.setOnClickListener {
             claimNoViolationReward()
         }
 
-        // 全年无违规奖励
+        // 全年无违法奖励
         binding.claimAnnualNoViolationReward.setOnClickListener {
             claimAnnualNoViolationReward()
         }
@@ -777,6 +808,14 @@ class YxActivity : AppCompatActivity() {
             .show()
     }
 
+
+    private fun showMyPicture() {
+        val gmlBottomSheet = layoutInflater.inflate(R.layout.gml_picture, null)
+        val gmlbottomSheetDialog = BottomSheetDialog(this)
+        gmlbottomSheetDialog.setContentView(gmlBottomSheet)
+        gmlbottomSheetDialog.show()
+    }
+
     private fun showSpendDialog() {
         val input = TextInputEditText(this)
         input.hint = "输入支出金额"
@@ -1176,7 +1215,7 @@ class YxActivity : AppCompatActivity() {
     }
 
     private fun claimNoViolationReward() {
-        // 检查最近一个月是否有违规记录
+        // 检查最近一个月是否有违法记录
         val lastViolationTime = sharedPreferences.getLong("last_violation_time", 0)
         val currentTime = System.currentTimeMillis()
         val monthInMillis = 30L * 24 * 60 * 60 * 1000 // 粗略一个月的毫秒数
@@ -1189,7 +1228,7 @@ class YxActivity : AppCompatActivity() {
             val editor = sharedPreferences.edit()
             editor.putInt("yuan_pang_balance", currentBalance + rewardAmount)
             editor.putInt("total_yuan_pang_earned", totalEarned + rewardAmount)
-            // 更新最后违规时间为当前时间，以便后续计算
+            // 更新最后违法时间为当前时间，以便后续计算
             editor.putLong("last_violation_time", currentTime)
             editor.apply()
 
@@ -1197,25 +1236,25 @@ class YxActivity : AppCompatActivity() {
 
             MaterialAlertDialogBuilder(this)
                 .setTitle("奖励申领成功")
-                .setMessage("无违规奖励 $rewardAmount 莹钞已发放！" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else "")
+                .setMessage("无违法奖励 $rewardAmount 莹钞已发放！" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else "")
                 .setPositiveButton("确定", null)
                 .show()
         } else {
             MaterialAlertDialogBuilder(this)
                 .setTitle("无法申领")
-                .setMessage("近一个月内有违规记录，暂无法申领无违规奖励")
+                .setMessage("近一个月内有违法记录，暂无法申领无违法奖励")
                 .setPositiveButton("确定", null)
                 .show()
         }
     }
 
     private fun claimAnnualNoViolationReward() {
-        // 检查去年是否有违规记录
+        // 检查去年是否有违法记录
         val lastYearViolationTime = sharedPreferences.getLong("last_violation_time", 0)
         val currentTime = System.currentTimeMillis()
         val yearInMillis = 365L * 24 * 60 * 60 * 1000 // 粗略一年的毫秒数
 
-        // 简化逻辑：检查过去一年是否有违规
+        // 简化逻辑：检查过去一年是否有违法
         if (currentTime - lastYearViolationTime >= yearInMillis) {
             val rewardAmount = if (isDoubleYuanPangDay()) 213 * 2 else 213 // 双倍莹钞日翻倍
             val currentBalance = sharedPreferences.getInt("yuan_pang_balance", 0)
@@ -1230,13 +1269,13 @@ class YxActivity : AppCompatActivity() {
 
             MaterialAlertDialogBuilder(this)
                 .setTitle("奖励申领成功")
-                .setMessage("年度无违规奖励 $rewardAmount 莹钞已发放！" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else "")
+                .setMessage("年度无违法奖励 $rewardAmount 莹钞已发放！" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else "")
                 .setPositiveButton("确定", null)
                 .show()
         } else {
             MaterialAlertDialogBuilder(this)
                 .setTitle("无法申领")
-                .setMessage("过去一年内有违规记录，暂无法申领年度奖励")
+                .setMessage("过去一年内有违法记录，暂无法申领年度奖励")
                 .setPositiveButton("确定", null)
                 .show()
         }
@@ -1756,119 +1795,122 @@ class YxActivity : AppCompatActivity() {
             processExpiredSavings(savingsRecords)
         }
     }
-    
+
     // 新增：显示清空所有记录的对话框
     private fun showClearAllRecordsDialog() {
         MaterialAlertDialogBuilder(this)
             .setTitle("清空所有记录")
-            .setMessage("您确定要清空所有莹钞余额、违规记录和储蓄记录吗？此操作不可恢复！")
+            .setMessage("您确定要清空所有莹钞余额、违法记录和储蓄记录吗？此操作不可恢复！")
             .setPositiveButton("确认清空") { _, _ ->
                 clearAllRecords()
             }
             .setNegativeButton("取消", null)
             .show()
     }
-    
+
     // 新增：清空所有记录
     private fun clearAllRecords() {
         val editor = sharedPreferences.edit()
-        
+
         // 清空莹钞余额相关
         editor.putInt("yuan_pang_balance", 0)
         editor.putInt("total_yuan_pang_earned", 0)
-        
-        // 清空违规记录相关
+
+        // 清空违法记录相关
         editor.putInt("penalty_count", 0)
         editor.putLong("last_violation_time", 0)
         editor.putStringSet("violated_ordinances", mutableSetOf())
-        
-        // 清空所有详细的违规记录
+
+        // 清空所有详细的违法记录
         for (i in 1..16) { // 假设法令总数为16
             val detailedViolationKey = "violation_detail_$i"
             editor.remove(detailedViolationKey)
         }
-        
+
         // 清空储蓄记录相关
         editor.putStringSet("savings_records", mutableSetOf())
-        
+
         // 清空其他可能的相关记录
         editor.putInt("abstinence_cycle_progress", 0)
         editor.putInt("abstinence_accumulated_reward", 0)
         editor.putInt("fitness_streak", 0)
         editor.putInt("last_fitness_date", 0)
-        
+
         // 重置固定奖励领取记录
         editor.putInt("last_fixed_reward_year", 0)
         editor.putInt("last_fixed_reward_month", 0)
-        
+
         editor.apply()
-        
+
         loadData() // 更新UI显示
         updateOrdinanceStatus() // 更新法令状态
-        
+
         MaterialAlertDialogBuilder(this)
             .setTitle("清空完成")
             .setMessage("所有记录已清空，账户已归零")
             .setPositiveButton("确定", null)
             .show()
     }
-    
-    // 新增：显示违规历史记录对话框
+
+    // 新增：显示违法历史记录对话框
     private fun showBanHistoryDialog() {
-        // 获取所有曾经违规的记录（包括已完成的）
+        // 获取所有曾经违法的记录（包括已完成的）
         val allOrdinanceNumbers = (1..16) // 假设法令总数为16
         val banHistoryList = mutableListOf<String>()
-        
+
         for (i in allOrdinanceNumbers) {
             val detailedViolationKey = "violation_detail_$i"
             val violationDetail = sharedPreferences.getString(detailedViolationKey, null)
-            
+
             if (violationDetail != null) {
                 val parts = violationDetail.split(":")
                 if (parts.size >= 2) {
                     val timestamp = parts[0].toLong()
                     val status = parts[1]
                     val ordinanceText = getOrdinanceTextByNumber(i)
-                    
+
                     val violationDate = try {
-                        java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
+                        java.text.SimpleDateFormat(
+                            "yyyy-MM-dd HH:mm",
+                            java.util.Locale.getDefault()
+                        )
                             .format(java.util.Date(timestamp))
                     } catch (e: Exception) {
                         "未知时间"
                     }
-                    
+
                     val statusText = if (status == "completed") "已完成处罚" else "待完成处罚"
-                    
+
                     banHistoryList.add(
                         "法令编号: $i\n" +
-                        "违规时间: $violationDate\n" +
-                        "处罚状态: $statusText\n" +
-                        "法令内容: $ordinanceText"
+                                "违法时间: $violationDate\n" +
+                                "处罚状态: $statusText\n" +
+                                "法令内容: $ordinanceText"
                     )
                 }
             }
         }
-        
+
         if (banHistoryList.isEmpty()) {
             MaterialAlertDialogBuilder(this)
-                .setTitle("违规历史记录")
-                .setMessage("暂无违规记录")
+                .setTitle("违法历史记录")
+                .setMessage("暂无违法记录")
                 .setPositiveButton("确定", null)
                 .show()
             return
         }
-        
+
         val banHistoryArray = banHistoryList.toTypedArray()
-        
+
         MaterialAlertDialogBuilder(this)
-            .setTitle("违规历史记录")
+            .setTitle("违法历史记录")
             .setItems(banHistoryArray) { _, _ ->
                 // 点击项目不做任何操作
             }
             .setPositiveButton("确定", null)
             .show()
     }
-    
+
     // 新增：根据法令编号获取法令文本
     private fun getOrdinanceTextByNumber(number: Int): String {
         val ordinances = listOf(
@@ -1889,12 +1931,160 @@ class YxActivity : AppCompatActivity() {
             "禁止购买任何游戏内虚拟物品、代币或服务，即禁止游戏充值，违者罚跑800米，20个仰卧起坐。",
             "严禁在任何网络平台，进行打赏、刷礼物、充电等付费活动，违者罚跑1000米，40个仰卧起坐。"
         )
-        
+
         return if (number > 0 && number <= ordinances.size) {
             ordinances[number - 1]
         } else {
             "未知法令"
         }
+    }
+
+    // 新增：显示导出导入底部工作表
+    private fun showExportImportBottomSheet() {
+        val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_export_import, null)
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(bottomSheetView)
+
+        val btnExport =
+            bottomSheetView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnExport)
+        val btnImport =
+            bottomSheetView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnImport)
+
+        btnExport.setOnClickListener {
+            exportData()
+            bottomSheetDialog.dismiss()
+        }
+
+        btnImport.setOnClickListener {
+            importData()
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.show()
+    }
+
+    // 新增：导出数据
+    private fun exportData() {
+        // 获取当前所有数据
+        val balance = sharedPreferences.getInt("yuan_pang_balance", 0)
+        val totalEarned = sharedPreferences.getInt("total_yuan_pang_earned", 0)
+        val penaltyCount = sharedPreferences.getInt("penalty_count", 0)
+        val violatedOrdinances =
+            sharedPreferences.getStringSet("violated_ordinances", mutableSetOf()) ?: mutableSetOf()
+        val savingsRecords =
+            sharedPreferences.getStringSet("savings_records", mutableSetOf()) ?: mutableSetOf()
+
+        // 获取所有详细违法记录
+        val violationDetails = mutableMapOf<String, String>()
+        for (i in 1..16) { // 假设法令总数为16
+            val detailedViolationKey = "violation_detail_$i"
+            val violationDetail = sharedPreferences.getString(detailedViolationKey, null)
+            if (violationDetail != null) {
+                violationDetails[detailedViolationKey] = violationDetail
+            }
+        }
+
+        val abstinenceCycleProgress = sharedPreferences.getInt("abstinence_cycle_progress", 0)
+        val abstinenceAccumulatedReward =
+            sharedPreferences.getInt("abstinence_accumulated_reward", 0)
+        val fitnessStreak = sharedPreferences.getInt("fitness_streak", 0)
+        val lastFitnessDate = sharedPreferences.getInt("last_fitness_date", 0)
+        val lastFixedRewardYear = sharedPreferences.getInt("last_fixed_reward_year", 0)
+        val lastFixedRewardMonth = sharedPreferences.getInt("last_fixed_reward_month", 0)
+        val lastViolationTime = sharedPreferences.getLong("last_violation_time", 0)
+        val selectedCurrency = sharedPreferences.getString("selected_currency", CURRENCY_YUAN_PANG)
+            ?: CURRENCY_YUAN_PANG
+
+        // 调用工具类导出数据
+        dataExportImportUtils.exportData(
+            balance = balance,
+            totalEarned = totalEarned,
+            penaltyCount = penaltyCount,
+            violatedOrdinances = violatedOrdinances,
+            savingsRecords = savingsRecords,
+            violationDetails = violationDetails,
+            abstinenceCycleProgress = abstinenceCycleProgress,
+            abstinenceAccumulatedReward = abstinenceAccumulatedReward,
+            fitnessStreak = fitnessStreak,
+            lastFitnessDate = lastFitnessDate,
+            lastFixedRewardYear = lastFixedRewardYear,
+            lastFixedRewardMonth = lastFixedRewardMonth,
+            lastViolationTime = lastViolationTime,
+            selectedCurrency = selectedCurrency
+        )
+    }
+
+    // 新增：导入数据
+    private fun importData() {
+        try {
+            // 启动文件选择器，只允许选择JSON文件
+            importFileLauncher.launch("application/json")
+        } catch (e: Exception) {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("错误")
+                .setMessage("无法打开文件选择器: ${e.message}")
+                .setPositiveButton("确定", null)
+                .show()
+        }
+    }
+
+    // 处理导入的文件
+    private fun handleImportFile(uri: Uri) {
+        try {
+            // 使用流的方式读取文件内容
+            contentResolver.openInputStream(uri)?.use { inputStream ->
+                val jsonString = inputStream.bufferedReader().use { it.readText() }
+                val importedData = dataExportImportUtils.importDataFromJsonString(jsonString)
+                importedData?.let { data ->
+                    restoreData(data)
+                }
+            }
+        } catch (e: Exception) {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("错误")
+                .setMessage("读取文件失败: ${e.message}")
+                .setPositiveButton("确定", null)
+                .show()
+        }
+    }
+
+    // 新增：恢复导入的数据
+    private fun restoreData(importedData: tz.yx.gml.utils.ExportData) {
+        val editor = sharedPreferences.edit()
+
+        // 恢复基础数据
+        editor.putInt("yuan_pang_balance", importedData.balance)
+        editor.putInt("total_yuan_pang_earned", importedData.totalEarned)
+        editor.putInt("penalty_count", importedData.penaltyCount)
+        editor.putStringSet("violated_ordinances", importedData.violatedOrdinances)
+        editor.putStringSet("savings_records", importedData.savingsRecords)
+
+        // 恢复详细违法记录
+        for ((key, value) in importedData.violationDetails) {
+            editor.putString(key, value)
+        }
+
+        // 恢复其他数据
+        editor.putInt("abstinence_cycle_progress", importedData.abstinenceCycleProgress)
+        editor.putInt("abstinence_accumulated_reward", importedData.abstinenceAccumulatedReward)
+        editor.putInt("fitness_streak", importedData.fitnessStreak)
+        editor.putInt("last_fitness_date", importedData.lastFitnessDate)
+        editor.putInt("last_fixed_reward_year", importedData.lastFixedRewardYear)
+        editor.putInt("last_fixed_reward_month", importedData.lastFixedRewardMonth)
+        editor.putLong("last_violation_time", importedData.lastViolationTime)
+        editor.putString("selected_currency", importedData.selectedCurrency)
+
+        editor.apply()
+
+        // 更新UI
+        loadData()
+        updateOrdinanceStatus()
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("导入完成")
+            .setMessage("数据已成功恢复")
+            .setPositiveButton("确定", null)
+            .show()
     }
 
     override fun onDestroy() {

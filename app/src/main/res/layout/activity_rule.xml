@@ -21,7 +21,7 @@
                 android:paddingVertical="6dp">
 
             <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/hometitle"
+                    android:id="@+id/walletname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -90,6 +90,7 @@
 
         <!-- 顶部钱包信息卡片 -->
         <com.google.android.material.card.MaterialCardView
+                android:id="@+id/totalcard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -133,6 +134,8 @@
                                 android:textColor="#01020F"
                                 android:textSize="50sp"
                                 android:textStyle="bold"
+                                style="@style/SystemFontTextView"
+                                android:fontFamily="sans-serif-black"
                                 android:layout_marginTop="10dp" />
 
 
