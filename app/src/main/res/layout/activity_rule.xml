@@ -205,28 +205,49 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="center"
                 android:layout_margin="12dp"
                 android:background="@drawable/glow_text_background"
-                android:paddingVertical="16dp">
+                android:paddingVertical="10dp">
 
             <TextView
-                    android:id="@+id/totalYuanPang"
+                    android:id="@+id/yingyear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="总计获得: 0 Ƶ"
+                    android:text="莹历2000年 🍥 莹轩5年"
                     android:textColor="#424242"
                     android:textSize="16sp"
-                    android:layout_marginEnd="24dp" />
+                    android:layout_marginBottom="12dp" />
 
-            <TextView
-                    android:id="@+id/penaltyCount"
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="违法次数: 0 次"
-                    android:textColor="#424242"
-                    android:textSize="16sp" />
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/glow_text_background"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="15dp">
+
+                <TextView
+                        android:id="@+id/totalYuanPang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总计获得: 0 Ƶ"
+                        android:textColor="#424242"
+                        android:textSize="14sp"
+                        android:layout_marginEnd="24dp" />
+
+                <TextView
+                        android:id="@+id/penaltyCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="违法次数: 0 次"
+                        android:textColor="#424242"
+                        android:textSize="14sp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

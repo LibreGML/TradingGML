@@ -88,6 +88,9 @@ class YxActivity : AppCompatActivity() {
 
             // 初始化法令状态
             updateOrdinanceStatus()
+
+            // 更新莹历显示
+            updateYingYearDisplay()
         } catch (e: Exception) {
             // 如果初始化失败，显示错误信息
             MaterialAlertDialogBuilder(this)
@@ -130,6 +133,8 @@ class YxActivity : AppCompatActivity() {
         binding.yuanPangBalance.text = displayBalance
         binding.totalYuanPang.text = displayTotalEarned
         binding.penaltyCount.text = "违法次数: $penalties 次"
+
+        updateYingYearDisplay()
     }
 
     private fun setupListeners() {
@@ -165,6 +170,9 @@ class YxActivity : AppCompatActivity() {
         binding.tozero.setOnClickListener {
             showClearAllRecordsDialog()
         }
+
+        // 更新莹历显示
+        updateYingYearDisplay()
 
         // 添加违法历史按钮的点击事件
         binding.banhistory.setOnClickListener {
@@ -1785,6 +1793,8 @@ class YxActivity : AppCompatActivity() {
         updateOrdinanceStatus()
         // 检查是否有到期的储蓄并处理
         checkAndProcessExpiredSavings()
+        // 更新莹历显示
+        updateYingYearDisplay()
     }
 
     // 新增：检查并处理到期储蓄
@@ -1936,6 +1946,38 @@ class YxActivity : AppCompatActivity() {
             ordinances[number - 1]
         } else {
             "未知法令"
+        }
+    }
+
+    // 计算莹历的函数
+    private fun calculateYingYear(publicYear: Int, publicMonth: Int): Int {
+        val yingYear = 1895 + 18 * (publicYear - 2020) + 1.5 * (publicMonth - 1)
+        return yingYear.toInt() // 去掉小数点部分
+    }
+
+    // 计算莹轩年数的函数（从2021年开始计算）
+    private fun calculateYingXuanYears(publicYear: Int): Int {
+        // 莹轩年从2021年开始计算，包含当前年份
+        return publicYear - 2021 + 1
+    }
+
+    // 更新莹历显示
+    private fun updateYingYearDisplay() {
+        try {
+            val currentDate = java.util.Date()
+            val publicYear =
+                android.text.format.DateFormat.format("yyyy", currentDate).toString().toInt()
+            val publicMonth =
+                android.text.format.DateFormat.format("MM", currentDate).toString().toInt()
+
+            val yingYear = calculateYingYear(publicYear, publicMonth)
+            val yingXuanYears = calculateYingXuanYears(publicYear)
+
+            val yingYearText = "莹历${yingYear}年  莹轩${yingXuanYears}年"
+            binding.yingyear.text = yingYearText
+        } catch (e: Exception) {
+            // 如果计算失败，显示默认值
+            binding.yingyear.text = "莹历2000年 | 莹轩5年"
         }
     }
 

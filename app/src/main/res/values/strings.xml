@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">TradingGML</string>
 
-    <string name="shortcut_rule_short_label">🍥 交易纪律</string>
-    <string name="shortcut_rule_long_label">🍥 交易纪律</string>
-    <string name="shortcut_rule_disabled_message">🍥 交易纪律不可用</string>
+    <string name="shortcut_rule_short_label">🍥 基本法</string>
+    <string name="shortcut_rule_long_label">🍥 基本法</string>
+    <string name="shortcut_rule_disabled_message">🍥 程序出Bug了</string>
 
     <string name="shortcut_bird_short_label">🍉 飞行小鸟</string>
     <string name="shortcut_bird_long_label">🍉 飞行小鸟</string>

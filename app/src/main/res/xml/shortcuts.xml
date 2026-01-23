@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
-        android:shortcutId="rule"
-        android:enabled="true"
-        android:icon="@drawable/atomic"
-        android:shortcutShortLabel="@string/shortcut_rule_short_label"
-        android:shortcutLongLabel="@string/shortcut_rule_long_label"
-        android:shortcutDisabledMessage="@string/shortcut_rule_disabled_message">
+            android:shortcutId="rule"
+            android:enabled="true"
+            android:icon="@drawable/atomic"
+            android:shortcutShortLabel="@string/shortcut_rule_short_label"
+            android:shortcutLongLabel="@string/shortcut_rule_long_label"
+            android:shortcutDisabledMessage="@string/shortcut_rule_disabled_message">
         <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="tz.yx.gml"
-            android:targetClass="tz.yx.gml.homefrag.RuleActivity" />
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="tz.yx.gml"
+                android:targetClass="tz.yx.gml.homefrag.YxActivity" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 
     <shortcut
-        android:shortcutId="bird"
-        android:enabled="true"
-        android:icon="@drawable/atomic"
-        android:shortcutShortLabel="@string/shortcut_bird_short_label"
-        android:shortcutLongLabel="@string/shortcut_bird_long_label"
-        android:shortcutDisabledMessage="@string/shortcut_bird_disabled_message">
+            android:shortcutId="bird"
+            android:enabled="true"
+            android:icon="@drawable/atomic"
+            android:shortcutShortLabel="@string/shortcut_bird_short_label"
+            android:shortcutLongLabel="@string/shortcut_bird_long_label"
+            android:shortcutDisabledMessage="@string/shortcut_bird_disabled_message">
         <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="tz.yx.gml"
-            android:targetClass="tz.yx.gml.plugins.BirdActivity" />
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="tz.yx.gml"
+                android:targetClass="tz.yx.gml.plugins.BirdActivity" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 
     <shortcut
-        android:shortcutId="note"
-        android:enabled="true"
-        android:icon="@drawable/atomic"
-        android:shortcutShortLabel="@string/shortcut_note_short_label"
-        android:shortcutLongLabel="@string/shortcut_note_long_label"
-        android:shortcutDisabledMessage="@string/shortcut_note_disabled_message">
+            android:shortcutId="note"
+            android:enabled="true"
+            android:icon="@drawable/atomic"
+            android:shortcutShortLabel="@string/shortcut_note_short_label"
+            android:shortcutLongLabel="@string/shortcut_note_long_label"
+            android:shortcutDisabledMessage="@string/shortcut_note_disabled_message">
         <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="tz.yx.gml"
-            android:targetClass="tz.yx.gml.note.NotelistActivity" />
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="tz.yx.gml"
+                android:targetClass="tz.yx.gml.note.NotelistActivity" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 
     <shortcut
-        android:shortcutId="passwd"
-        android:icon="@drawable/atomic"
-        android:enabled="true"
-        android:shortcutShortLabel="@string/shortcut_passwd_short_label"
-        android:shortcutLongLabel="@string/shortcut_passwd_long_label"
-        android:shortcutDisabledMessage="@string/shortcut_passwd_disabled_message">
+            android:shortcutId="passwd"
+            android:icon="@drawable/atomic"
+            android:enabled="true"
+            android:shortcutShortLabel="@string/shortcut_passwd_short_label"
+            android:shortcutLongLabel="@string/shortcut_passwd_long_label"
+            android:shortcutDisabledMessage="@string/shortcut_passwd_disabled_message">
         <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="tz.yx.gml"
-            android:targetClass="tz.yx.gml.passwd.PasswdActivity" />
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="tz.yx.gml"
+                android:targetClass="tz.yx.gml.passwd.PasswdActivity" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 </shortcuts>
