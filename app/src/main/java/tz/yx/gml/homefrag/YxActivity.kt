@@ -1224,7 +1224,13 @@ class YxActivity : AppCompatActivity() {
 
     private fun claimNoViolationReward() {
         // 检查最近一个月是否有违法记录
-        val lastViolationTime = sharedPreferences.getLong("last_violation_time", 0)
+        // 获取最后违法时间，兼容Integer和Long类型
+        val lastViolationTimeValue = sharedPreferences.getAll()["last_violation_time"]
+        val lastViolationTime = when (lastViolationTimeValue) {
+            is Long -> lastViolationTimeValue
+            is Int -> lastViolationTimeValue.toLong()
+            else -> 0L
+        }
         val currentTime = System.currentTimeMillis()
         val monthInMillis = 30L * 24 * 60 * 60 * 1000 // 粗略一个月的毫秒数
 
@@ -1258,7 +1264,13 @@ class YxActivity : AppCompatActivity() {
 
     private fun claimAnnualNoViolationReward() {
         // 检查去年是否有违法记录
-        val lastYearViolationTime = sharedPreferences.getLong("last_violation_time", 0)
+        // 获取最后违法时间，兼容Integer和Long类型
+        val lastYearViolationTimeValue = sharedPreferences.getAll()["last_violation_time"]
+        val lastYearViolationTime = when (lastYearViolationTimeValue) {
+            is Long -> lastYearViolationTimeValue
+            is Int -> lastYearViolationTimeValue.toLong()
+            else -> 0L
+        }
         val currentTime = System.currentTimeMillis()
         val yearInMillis = 365L * 24 * 60 * 60 * 1000 // 粗略一年的毫秒数
 
@@ -1290,111 +1302,484 @@ class YxActivity : AppCompatActivity() {
     }
 
     private fun claimAbstinenceReward() {
-        // 简化的禁欲周期奖励逻辑
+        // 获取当前周期进度和上次打卡时间
         val currentCycleProgress = sharedPreferences.getInt("abstinence_cycle_progress", 0)
-        val newProgress = currentCycleProgress + 1
-
-        if (newProgress >= 35) { // 完成了35天周期
-            val baseReward = if (isDoubleYuanPangDay()) 148 * 2 else 148 // 双倍莹钞日翻倍
-            val accumulatedReward = sharedPreferences.getInt("abstinence_accumulated_reward", 0)
-            val totalReward = baseReward + accumulatedReward
-
+        // 获取上次禁欲打卡日期，兼容Integer和Long类型
+        val lastAbstinenceDateValue = sharedPreferences.getAll()["last_abstinence_date"]
+        val lastAbstinenceDate = when (lastAbstinenceDateValue) {
+            is Long -> lastAbstinenceDateValue
+            is Int -> lastAbstinenceDateValue.toLong()
+            else -> 0L
+        }
+        
+        // 获取当前日期
+        val currentTime = System.currentTimeMillis()
+        val currentDay = try {
+            android.text.format.DateFormat.format("yyyyMMdd", java.util.Date(currentTime)).toString().toInt()
+        } catch (e: Exception) {
+            0 // 如果解析失败，返回默认值
+        }
+        
+        // 获取上次打卡日期
+        val lastDay = try {
+            if (lastAbstinenceDate != 0L) {
+                android.text.format.DateFormat.format("yyyyMMdd", java.util.Date(lastAbstinenceDate)).toString().toInt()
+            } else {
+                0  // 如果上次打卡时间是0，则认为没有打过卡
+            }
+        } catch (e: Exception) {
+            0
+        }
+        
+        // 检查是否今天已经打卡
+        if (hasCheckedInToday()) {
+            // 今天已经打卡，显示当前进度并提示已打卡
+            val currentCycleProgressMod = currentCycleProgress % 35
+            val actualDayInCycle = if (currentCycleProgress == 0) 0 else if (currentCycleProgressMod == 0 && currentCycleProgress > 0) 35 else currentCycleProgressMod
+            val completedCycles = currentCycleProgress / 35
+            
+            val message = "今天已经打卡过了！\n\n" +
+                    "当前进度：$actualDayInCycle/35天\n" +
+                    "当前是第 ${completedCycles + 1} 个周期\n" +
+                    "已完成周期：$completedCycles 个\n" +
+                    if (actualDayInCycle > 0 && actualDayInCycle < 35) {
+                        val daysLeft = 35 - actualDayInCycle
+                        "距离完成还有：$daysLeft 天\n"
+                    } else if (actualDayInCycle == 35) {
+                        "距离完成还有：0 天\n"
+                    } else {
+                        "开始新的周期后，每天打卡积累进度\n"
+                    } +
+                    "继续保持，坚持就是胜利！"
+            
+            MaterialAlertDialogBuilder(this)
+                .setTitle("今日已打卡")
+                .setMessage(message)
+                .setPositiveButton("重置周期") { _, _ ->
+                    // 添加重置周期的确认对话框
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle("确认重置周期")
+                        .setMessage("您确定要重置禁欲周期吗？当前进度将会丢失，从第1天重新开始。")
+                        .setPositiveButton("确认重置") { _, _ ->
+                            resetAbstinenceCycle()
+                        }
+                        .setNegativeButton("取消", null)
+                        .show()
+                }
+                .setNegativeButton("确定", null)
+                .show()
+            return
+        }
+        
+        // 检查是否是第一次打卡
+        val isFirstTime = (currentCycleProgress == 0 && lastAbstinenceDate == 0L)
+        
+        val dialogMessage = if (isFirstTime) {
+            "您确定要开始禁欲周期吗？这是一个重要的承诺！\n\n开始后，您将努力完成35天的禁欲挑战。\n\n注意：每天只能成功打卡一次。"
+        } else {
+            val currentDayInCycle = if (currentCycleProgress % 35 == 0 && currentCycleProgress > 0) 35 else currentCycleProgress % 35
+            val actualDayInCycle = if (currentDayInCycle == 0 && currentCycleProgress > 0) 35 else currentDayInCycle
+            val daysRemaining = 35 - (currentCycleProgress % 35)
+            "您确定要继续禁欲周期吗？\n\n当前进度：$actualDayInCycle/35天\n剩余：$daysRemaining 天\n\n注意：每天只能成功打卡一次。"
+        }
+        
+        // 弹出确认对话框，让用户确认是否真正开始或继续禁欲打卡
+        MaterialAlertDialogBuilder(this)
+            .setTitle("确认禁欲打卡")
+            .setMessage(dialogMessage)
+            .setPositiveButton("确认打卡") { _, _ ->
+                // 检查是否连续打卡
+                val expectedNextDay = lastDay + 1
+                val isConsecutive = (currentDay == expectedNextDay) || (lastDay == 0) // 如果是第一次打卡，则视为连续
+                
+                val newProgress = if (isConsecutive) {
+                    currentCycleProgress + 1
+                } else {
+                    // 中断了，重置计数并结算之前已完成的完整周期奖励
+                    val completedCycles = currentCycleProgress / 35
+                    if (completedCycles > 0) {
+                        // 计算当前奖励基数，然后反推出每个已完成周期的奖励
+                        var accumulatedReward = 0
+                        var cycleReward = 148 // 初始奖励
+                        for (i in 1..completedCycles) {
+                            if (i > 1) {
+                                // 从第二个周期开始，每个周期奖励是前一个周期的1.1倍
+                                cycleReward = try {
+                                    (cycleReward * 1.1).toInt()
+                                } catch (e: ArithmeticException) {
+                                    Int.MAX_VALUE
+                                    break
+                                }
+                            }
+                            accumulatedReward += if (isDoubleYuanPangDay()) cycleReward * 2 else cycleReward
+                        }
+                                
+                        val currentBalance = sharedPreferences.getInt("yuan_pang_balance", 0)
+                        val totalEarned = sharedPreferences.getInt("total_yuan_pang_earned", 0)
+                                
+                        val editor = sharedPreferences.edit()
+                        editor.putInt("yuan_pang_balance", currentBalance + accumulatedReward)
+                        editor.putInt("total_yuan_pang_earned", totalEarned + accumulatedReward)
+                        editor.apply()
+                                
+                        loadData()
+                    }
+                    1 // 重新开始计数
+                }
+                
+                // 检查是否完成了一个或多个完整的35天周期
+                if (newProgress % 35 == 0) {
+                    // 完成了一个或多个35天周期，给予奖励并开始下一个周期
+                    completeAbstinenceCycle(newProgress)
+                } else {
+                    // 更新进度但不完成周期
+                    val editor = sharedPreferences.edit()
+                    editor.putInt("abstinence_cycle_progress", newProgress)
+                    editor.putLong("last_abstinence_date", currentTime)
+                    editor.apply()
+                    
+                    // 显示打卡成功信息
+                    val currentCycleProgressMod = newProgress % 35
+                    val actualDayInCycle = if (newProgress == 0) 0 else if (currentCycleProgressMod == 0 && newProgress > 0) 35 else currentCycleProgressMod
+                    val completedCycles = newProgress / 35
+                    
+                    val message = "禁欲打卡成功！\n\n" +
+                            "当前进度：$actualDayInCycle/35天\n" +
+                            "当前是第 ${completedCycles + 1} 个周期\n" +
+                            "已完成周期：$completedCycles 个\n" +
+                            if (actualDayInCycle > 0 && actualDayInCycle < 35) {
+                                val daysLeft = 35 - actualDayInCycle
+                                "距离完成还有：$daysLeft 天\n"
+                            } else if (actualDayInCycle == 35) {
+                                "距离完成还有：0 天\n"
+                            } else {
+                                "开始新的周期后，每天打卡积累进度\n"
+                            } +
+                            "继续保持，坚持就是胜利！"
+                    
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle("打卡成功")
+                        .setMessage(message)
+                        .setPositiveButton("重置周期") { _, _ ->
+                            // 添加重置周期的确认对话框
+                            MaterialAlertDialogBuilder(this)
+                                .setTitle("确认重置周期")
+                                .setMessage("您确定要重置禁欲周期吗？当前进度将会丢失，从第1天重新开始。")
+                                .setPositiveButton("确认重置") { _, _ ->
+                                    resetAbstinenceCycle()
+                                }
+                                .setNegativeButton("取消", null)
+                                .show()
+                        }
+                        .setNegativeButton("确定", null)
+                        .show()
+                }
+            }
+            .setNegativeButton("取消", null)
+            .show()
+    }
+    
+    private fun completeAbstinenceCycle(progress: Int) {
+        // 计算完成的完整周期数量
+        val completedCycles = progress / 35
+        
+        // 计算当前周期的奖励（基于当前的奖励基数）
+        val currentCycleReward = calculateCurrentCycleReward()
+        val totalReward = if (isDoubleYuanPangDay()) currentCycleReward * 2 else currentCycleReward
+        
+        val currentBalance = sharedPreferences.getInt("yuan_pang_balance", 0)
+        val totalEarned = sharedPreferences.getInt("total_yuan_pang_earned", 0)
+        
+        val editor = sharedPreferences.edit()
+        editor.putInt("yuan_pang_balance", currentBalance + totalReward)
+        editor.putInt("total_yuan_pang_earned", totalEarned + totalReward)
+        
+        // 更新下一周期的奖励基数（几何累进），将当前奖励基数乘以1.1
+        val nextCycleReward = try {
+            (currentCycleReward * 1.1).toInt()
+        } catch (e: ArithmeticException) {
+            Int.MAX_VALUE // 如果计算溢出，设置为最大值
+        }
+        editor.putInt("abstinence_base_reward", nextCycleReward)
+        
+        // 重置周期进度为剩余天数，如果恰好完成完整周期则重置为0
+        val remainingDays = progress % 35
+        editor.putInt("abstinence_cycle_progress", remainingDays)
+        editor.putLong("last_abstinence_date", System.currentTimeMillis())
+        
+        editor.apply()
+        
+        loadData()
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("周期完成奖励")
+            .setMessage("恭喜完成禁欲周期！获得 $totalReward 莹钞奖励！（当前周期奖励基数：$currentCycleReward）" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else "")
+            .setPositiveButton("确定", null)
+            .show()
+    }
+    
+    private fun calculateCurrentCycleReward(): Int {
+        // 获取当前周期的基础奖励，如果没有则使用初始值148
+        return sharedPreferences.getInt("abstinence_base_reward", 148)
+    }
+    
+    private fun settlePreviousCycleReward(previousProgress: Int) {
+        // 计算之前完成的完整周期数量
+        val completedCycles = previousProgress / 35
+        if (completedCycles > 0) {
+            // 计算每个周期的奖励，第一个周期是148，后续周期是前一个周期的1.1倍
+            var accumulatedReward = 0
+            var cycleReward = 148 // 初始奖励
+            for (i in 1..completedCycles) {
+                if (i > 1) {
+                    // 从第二个周期开始，每个周期奖励是前一个周期的1.1倍
+                    cycleReward = try {
+                        (cycleReward * 1.1).toInt()
+                    } catch (e: ArithmeticException) {
+                        Int.MAX_VALUE
+                        break
+                    }
+                }
+                accumulatedReward += if (isDoubleYuanPangDay()) cycleReward * 2 else cycleReward
+            }
+            
             val currentBalance = sharedPreferences.getInt("yuan_pang_balance", 0)
             val totalEarned = sharedPreferences.getInt("total_yuan_pang_earned", 0)
-
+            
             val editor = sharedPreferences.edit()
-            editor.putInt("yuan_pang_balance", currentBalance + totalReward)
-            editor.putInt("total_yuan_pang_earned", totalEarned + totalReward)
-            editor.putInt("abstinence_cycle_progress", 0) // 重置周期
-            val newAccumulatedReward = try {
-                val calculatedReward = (accumulatedReward * 1.1).toInt()
-                if (calculatedReward < 0 || calculatedReward > 1000000) {
-                    if (accumulatedReward < 1000000) accumulatedReward else 1000000
-                } else {
-                    calculatedReward
-                }
-            } catch (e: ArithmeticException) {
-                accumulatedReward // 如果计算溢出，保持原值
-            }
-            editor.putInt(
-                "abstinence_accumulated_reward",
-                newAccumulatedReward
-            ) // 几何累进
+            editor.putInt("yuan_pang_balance", currentBalance + accumulatedReward)
+            editor.putInt("total_yuan_pang_earned", totalEarned + accumulatedReward)
             editor.apply()
-
+            
             loadData()
-
-            MaterialAlertDialogBuilder(this)
-                .setTitle("周期完成奖励")
-                .setMessage("恭喜完成禁欲周期！获得 $totalReward 莹钞奖励！" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else "")
-                .setPositiveButton("确定", null)
-                .show()
+        }
+    }
+    
+    // 检查今天是否已经完成禁欲打卡
+    private fun hasCheckedInToday(): Boolean {
+        val lastAbstinenceDateValue = sharedPreferences.getAll()["last_abstinence_date"]
+        val lastAbstinenceDate = when (lastAbstinenceDateValue) {
+            is Long -> lastAbstinenceDateValue
+            is Int -> lastAbstinenceDateValue.toLong()
+            else -> 0L
+        }
+        
+        val currentTime = System.currentTimeMillis()
+        val currentDay = try {
+            android.text.format.DateFormat.format("yyyyMMdd", java.util.Date(currentTime)).toString().toInt()
+        } catch (e: Exception) {
+            0 // 如果解析失败，返回默认值
+        }
+        
+        val lastDay = try {
+            if (lastAbstinenceDate != 0L) {
+                android.text.format.DateFormat.format("yyyyMMdd", java.util.Date(lastAbstinenceDate)).toString().toInt()
+            } else {
+                0  // 如果上次打卡时间是0，则认为没有打过卡
+            }
+        } catch (e: Exception) {
+            0
+        }
+        
+        return currentDay == lastDay && currentDay != 0
+    }
+    
+    private fun showAbstinenceProgressInfo(progress: Int) {
+        val currentReward = calculateCurrentCycleReward()
+        val doubleReward = if (isDoubleYuanPangDay()) currentReward * 2 else currentReward
+        val nextCycleReward = try {
+            (currentReward * 1.1).toInt()
+        } catch (e: ArithmeticException) {
+            Int.MAX_VALUE
+        }
+        
+        val currentCycleProgress = progress % 35
+        val completedCycles = progress / 35 // 已完成的完整周期数
+        val daysLeft = 35 - currentCycleProgress // 当前周期剩余天数
+        
+        // 计算当前周期内的具体天数
+        val currentCycleDay = if (currentCycleProgress == 0 && progress > 0) 35 else currentCycleProgress
+        
+        // 修正显示逻辑，确保正确显示当前进度
+        val displayDay = if (progress == 0) 0 else if (currentCycleProgress == 0 && progress > 0) 35 else currentCycleProgress
+        
+        val message = "禁欲周期进度：$displayDay/35天\n" +
+                "当前是第 ${completedCycles + 1} 个周期\n" +
+                "已完成周期：$completedCycles 个\n" +
+                if (displayDay > 0 && displayDay < 35) "距离完成还有：$daysLeft 天\n" else if (displayDay == 35) "距离完成还有：0 天\n" else "开始新的周期后，每天打卡积累进度\n" +
+                "当前周期奖励：$currentReward 莹钞" + if (isDoubleYuanPangDay()) "（双倍莹钞日：$doubleReward 莹钞）" else "" +
+                "\n下一周期奖励：$nextCycleReward 莹钞\n" +
+                "成功完成一个周期后，奖励将几何累进至下一周期"
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("禁欲周期进度")
+            .setMessage(message)
+            .setPositiveButton("重置周期") { _, _ ->
+                // 添加重置周期的确认对话框
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("确认重置周期")
+                    .setMessage("您确定要重置禁欲周期吗？当前进度将会丢失，从第1天重新开始。")
+                    .setPositiveButton("确认重置") { _, _ ->
+                        resetAbstinenceCycle()
+                    }
+                    .setNegativeButton("取消", null)
+                    .show()
+            }
+            .setNegativeButton("确定", null)
+            .show()
+    }
+    
+    // 新增：重置禁欲周期
+    private fun resetAbstinenceCycle() {
+        val editor = sharedPreferences.edit()
+        editor.putInt("abstinence_cycle_progress", 0)
+        editor.putLong("last_abstinence_date", 0L) // 重置最后打卡日期
+        editor.apply()
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("周期已重置")
+            .setMessage("禁欲周期已重置，您可以随时重新开始新的周期。")
+            .setPositiveButton("确定", null)
+            .show()
+    }
+    
+    // 新增：获取禁欲打卡状态信息
+    private fun getAbstinenceStatusInfo(): String {
+        val currentCycleProgress = sharedPreferences.getInt("abstinence_cycle_progress", 0)
+        val completedCycles = currentCycleProgress / 35
+        val currentCycleDay = if (currentCycleProgress % 35 == 0 && currentCycleProgress > 0) 35 else currentCycleProgress % 35
+        val actualDayInCycle = if (currentCycleProgress == 0) 0 else if (currentCycleProgress % 35 == 0 && currentCycleProgress > 0) 35 else currentCycleProgress % 35
+        
+        return if (currentCycleProgress == 0) {
+            "尚未开始禁欲周期"
         } else {
-            val editor = sharedPreferences.edit()
-            editor.putInt("abstinence_cycle_progress", newProgress)
-            editor.apply()
-
-            MaterialAlertDialogBuilder(this)
-                .setTitle("进度更新")
-                .setMessage("禁欲周期进度：$newProgress/35天")
-                .setPositiveButton("确定", null)
-                .show()
+            "当前进度：$actualDayInCycle/35天，已完成 $completedCycles 个完整周期"
         }
     }
 
     private fun claimFitnessReward() {
         // 检查今天是否已经打卡
         val today = try {
-            android.text.format.DateFormat.format("yyyyMMdd", java.util.Date()).toString().toInt()
+            android.text.format.DateFormat.format("yyyyMMdd", java.util.Date()).toString().toLong()
         } catch (e: Exception) {
             0 // 如果解析失败，返回默认值
         }
-        val lastFitnessDate = sharedPreferences.getInt("last_fitness_date", 0)
-
-        if (today == lastFitnessDate) {
+        
+        // 获取上次健身打卡日期，兼容Integer和Long类型
+        val lastFitnessDateValue = sharedPreferences.getAll()["last_fitness_date"]
+        val lastFitnessDate = when (lastFitnessDateValue) {
+            is Long -> lastFitnessDateValue
+            is Int -> lastFitnessDateValue.toLong()
+            else -> 0L
+        }
+        
+        // 获取上次打卡日期
+        val lastDay = try {
+            android.text.format.DateFormat.format("yyyyMMdd", java.util.Date(lastFitnessDate)).toString().toLong()
+        } catch (e: Exception) {
+            0L
+        }
+        
+        if (today == lastDay) {
+            // 今天已经打卡，显示当前连续打卡进度
+            val currentStreak = sharedPreferences.getInt("fitness_streak", 0)
             MaterialAlertDialogBuilder(this)
-                .setTitle("提示")
-                .setMessage("今天已经打卡过了，明天再来吧！")
+                .setTitle("健身打卡")
+                .setMessage("今天已经打卡过了，当前连续打卡：$currentStreak 天！")
                 .setPositiveButton("确定", null)
                 .show()
             return
         }
-
+        
+        // 弹出对话框让用户确认是否完成了完整训练计划
+        val trainingPlan = "今日训练计划：\n" +
+                "• 高抬腿 2分钟\n" +
+                "• 25个俯卧撑\n" +
+                "• 30次深蹲\n" +
+                "• 40个臀桥\n" +
+                "• 2分钟平板支撑\n" +
+                "• 1分钟坐位体前屈\n" +
+                "• 深呼吸 2分钟"
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("确认完成训练")
+            .setMessage(trainingPlan + "\n\n请确认您已完成以上全部训练项目")
+            .setPositiveButton("已完成") { _, _ ->
+                // 执行打卡逻辑
+                completeFitnessCheckIn(today)
+            }
+            .setNegativeButton("未完成", null)
+            .show()
+    }
+    
+    private fun completeFitnessCheckIn(today: Long) {
         val currentStreak = sharedPreferences.getInt("fitness_streak", 0)
-        val newStreak = currentStreak + 1
-
+        
+        // 检查是否连续打卡
+        // 获取上次健身打卡日期，兼容Integer和Long类型
+        val lastFitnessDateValue = sharedPreferences.getAll()["last_fitness_date"]
+        val lastFitnessDate = when (lastFitnessDateValue) {
+            is Long -> lastFitnessDateValue
+            is Int -> lastFitnessDateValue.toLong()
+            else -> 0L
+        }
+        val lastDayInt = try {
+            android.text.format.DateFormat.format("yyyyMMdd", java.util.Date(lastFitnessDate)).toString().toInt()
+        } catch (e: Exception) {
+            0
+        }
+        val expectedNextDay = lastDayInt + 1
+        val isConsecutive = (today.toInt() == expectedNextDay) || (lastDayInt == 0) // 如果是第一次打卡，则视为连续
+        
+        val newStreak = if (isConsecutive) {
+            currentStreak + 1
+        } else {
+            // 如果中断了，从1开始重新计数
+            1
+        }
+        
         val baseReward = if (isDoubleYuanPangDay()) 6 * 2 else 6 // 双倍莹钞日翻倍
         var additionalReward = 0
-
+        var rewardDetails = "基础奖励：$baseReward 莹钞"
+        
         // 检查是否连续7天全勤
-        if (newStreak % 7 == 0 && newStreak > 0) {
-            additionalReward += if (isDoubleYuanPangDay()) 42 * 2 else 42 // 连续7天奖励
+        if (newStreak % 7 == 0) {
+            val weeklyReward = if (isDoubleYuanPangDay()) 42 * 2 else 42 // 连续7天奖励
+            additionalReward += weeklyReward
+            rewardDetails += "\n连续7天奖励：$weeklyReward 莹钞"
         }
-
+        
         // 检查是否月完成24天
-        if (newStreak % 24 == 0 && newStreak > 0) {
-            additionalReward += if (isDoubleYuanPangDay()) 100 * 2 else 100 // 月完成24天奖励
+        if (newStreak % 24 == 0) {
+            val monthlyReward = if (isDoubleYuanPangDay()) 100 * 2 else 100 // 月完成24天奖励
+            additionalReward += monthlyReward
+            rewardDetails += "\n月完成24天奖励：$monthlyReward 莹钞"
         }
-
+        
         val totalReward = baseReward + additionalReward
         val currentBalance = sharedPreferences.getInt("yuan_pang_balance", 0)
         val totalEarned = sharedPreferences.getInt("total_yuan_pang_earned", 0)
-
+        
         val editor = sharedPreferences.edit()
         editor.putInt("yuan_pang_balance", currentBalance + totalReward)
         editor.putInt("total_yuan_pang_earned", totalEarned + totalReward)
         editor.putInt("fitness_streak", newStreak)
-        editor.putInt("last_fitness_date", today) // 记录打卡日期
+        editor.putLong("last_fitness_date", System.currentTimeMillis()) // 记录打卡时间
         editor.apply()
-
+        
         loadData()
-
-        val message = if (additionalReward > 0) {
-            "健身打卡成功！获得基础奖励 $baseReward 莹钞，额外奖励 $additionalReward 莹钞，总计 $totalReward 莹钞！" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else ""
+        
+        val streakMessage = if (isConsecutive) {
+            "连续打卡 $newStreak 天！"
         } else {
-            "健身打卡成功！获得 $baseReward 莹钞奖励！" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else ""
+            "重新开始打卡，当前连续 $newStreak 天。继续加油！"
         }
-
+        
+        val message = "健身打卡成功！$streakMessage\n\n" +
+                "奖励详情：\n" +
+                "$rewardDetails\n" +
+                "总计奖励：$totalReward 莹钞" + if (isDoubleYuanPangDay()) "（双倍莹钞日）" else ""
+        
         MaterialAlertDialogBuilder(this)
             .setTitle("打卡成功")
             .setMessage(message)
@@ -1844,7 +2229,7 @@ class YxActivity : AppCompatActivity() {
         editor.putInt("abstinence_cycle_progress", 0)
         editor.putInt("abstinence_accumulated_reward", 0)
         editor.putInt("fitness_streak", 0)
-        editor.putInt("last_fitness_date", 0)
+        editor.putLong("last_fitness_date", 0L)
 
         // 重置固定奖励领取记录
         editor.putInt("last_fixed_reward_year", 0)
@@ -2030,10 +2415,22 @@ class YxActivity : AppCompatActivity() {
         val abstinenceAccumulatedReward =
             sharedPreferences.getInt("abstinence_accumulated_reward", 0)
         val fitnessStreak = sharedPreferences.getInt("fitness_streak", 0)
-        val lastFitnessDate = sharedPreferences.getInt("last_fitness_date", 0)
+        // 获取上次健身打卡日期，兼容Integer和Long类型
+        val lastFitnessDateValue = sharedPreferences.getAll()["last_fitness_date"]
+        val lastFitnessDate = when (lastFitnessDateValue) {
+            is Long -> lastFitnessDateValue
+            is Int -> lastFitnessDateValue.toLong()
+            else -> 0L
+        }
         val lastFixedRewardYear = sharedPreferences.getInt("last_fixed_reward_year", 0)
         val lastFixedRewardMonth = sharedPreferences.getInt("last_fixed_reward_month", 0)
-        val lastViolationTime = sharedPreferences.getLong("last_violation_time", 0)
+        // 获取最后违法时间，兼容Integer和Long类型
+        val lastViolationTimeValue = sharedPreferences.getAll()["last_violation_time"]
+        val lastViolationTime = when (lastViolationTimeValue) {
+            is Long -> lastViolationTimeValue
+            is Int -> lastViolationTimeValue.toLong()
+            else -> 0L
+        }
         val selectedCurrency = sharedPreferences.getString("selected_currency", CURRENCY_YUAN_PANG)
             ?: CURRENCY_YUAN_PANG
 
@@ -2110,7 +2507,7 @@ class YxActivity : AppCompatActivity() {
         editor.putInt("abstinence_cycle_progress", importedData.abstinenceCycleProgress)
         editor.putInt("abstinence_accumulated_reward", importedData.abstinenceAccumulatedReward)
         editor.putInt("fitness_streak", importedData.fitnessStreak)
-        editor.putInt("last_fitness_date", importedData.lastFitnessDate)
+        editor.putLong("last_fitness_date", importedData.lastFitnessDate)
         editor.putInt("last_fixed_reward_year", importedData.lastFixedRewardYear)
         editor.putInt("last_fixed_reward_month", importedData.lastFixedRewardMonth)
         editor.putLong("last_violation_time", importedData.lastViolationTime)
