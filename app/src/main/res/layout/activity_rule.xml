@@ -78,7 +78,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="0 Ƶ"
                                         android:textColor="#82B1FF"
-                                        android:textSize="50sp"
+                                        android:textSize="56sp"
                                         android:textStyle="bold"
                                         style="@style/SystemFontTextView"
                                         android:fontFamily="sans-serif-black"
@@ -91,7 +91,7 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="8dp">
+                                    android:layout_marginTop="10dp">
 
                                 <com.google.android.material.button.MaterialButton
                                         android:id="@+id/spendButton"
@@ -169,7 +169,7 @@
                         android:id="@+id/yingyear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="莹历2000年 🍥 莹轩5年"
+                        android:text="*:･ﾟ✧ 莹历2021年2月1日 ✧･ﾟ:*"
                         android:textColor="#82B1FF"
                         android:textSize="16sp"
                         android:layout_marginBottom="12dp" />
@@ -1296,7 +1296,9 @@
             android:clickable="true"
             android:focusable="true"
             app:rippleColor="#1A84A1FF"
-            android:layout_gravity="top">
+            android:layout_gravity="top"
+            android:alpha="0.8"
+            >
 
         <LinearLayout
                 android:layout_width="match_parent"

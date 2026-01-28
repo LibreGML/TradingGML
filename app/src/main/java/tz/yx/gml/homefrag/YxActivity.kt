@@ -2337,17 +2337,50 @@ class YxActivity : AppCompatActivity() {
         }
     }
 
-    // 计算莹历的函数
-    private fun calculateYingYear(publicYear: Int, publicMonth: Int): Int {
-        val yingYear = 1895 + 18 * (publicYear - 2020) + 1.5 * (publicMonth - 1)
-        return yingYear.toInt() // 去掉小数点部分
+    // 检查是否为闰年
+    private fun isLeapYear(year: Int): Boolean {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
     }
 
-    // 计算莹轩年数的函数（从2021年开始计算）
-    private fun calculateYingXuanYears(publicYear: Int): Int {
-        // 莹轩年从2021年开始计算，包含当前年份
-        return publicYear - 2021 + 1
+    // 公历转莹历的函数
+    private fun gregorianToYingXuan(year: Int, month: Int, day: Int): Triple<Int, Int, Int> {
+        // 计算2020年到指定年份之间的闰年数
+        var leapCount = 0
+        for (y in 2020 until year) {
+            if (isLeapYear(y)) {
+                leapCount++
+            }
+        }
+        
+        // 计算从2020年1月1日到指定日期的总天数
+        val monthDays = intArrayOf(0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+        if (isLeapYear(year)) {
+            monthDays[2] = 29
+        }
+        
+        // 计算当年已过的天数
+        var daysSum = 0
+        for (i in 1 until month) {
+            daysSum += monthDays[i]
+        }
+        
+        val deltaT = (year - 2020) * 365 + leapCount + daysSum + (day - 1)
+        
+        // 计算莹历
+        val v = 1895 + deltaT * (18.0 / 365.0)
+        
+        val yYing = v.toInt() // 年
+        val fractional = v - yYing.toDouble()
+        
+        val totalMonths = fractional * 12
+        val mYing = totalMonths.toInt() + 1 // 月
+        
+        val remaining = totalMonths - totalMonths.toInt()
+        val dYing = (remaining * 30).toInt() + 1 // 日
+        
+        return Triple(yYing, mYing, dYing)
     }
+
 
     // 更新莹历显示
     private fun updateYingYearDisplay() {
@@ -2357,15 +2390,15 @@ class YxActivity : AppCompatActivity() {
                 android.text.format.DateFormat.format("yyyy", currentDate).toString().toInt()
             val publicMonth =
                 android.text.format.DateFormat.format("MM", currentDate).toString().toInt()
+            val publicDay =
+                android.text.format.DateFormat.format("dd", currentDate).toString().toInt()
 
-            val yingYear = calculateYingYear(publicYear, publicMonth)
-            val yingXuanYears = calculateYingXuanYears(publicYear)
+            val (yingYear, yingMonth, yingDay) = gregorianToYingXuan(publicYear, publicMonth, publicDay)
 
-            val yingYearText = "莹历${yingYear}年  莹轩${yingXuanYears}年"
+            val yingYearText = "*:･ﾟ✧ 莹历${yingYear}年${yingMonth}月${yingDay}日 ✧･ﾟ:*"
             binding.yingyear.text = yingYearText
         } catch (e: Exception) {
-            // 如果计算失败，显示默认值
-            binding.yingyear.text = "莹历2000年 | 莹轩5年"
+            binding.yingyear.text = "*:･ﾟ✧ 莹历2021年2月1日 ✧･ﾟ:*"
         }
     }
 
