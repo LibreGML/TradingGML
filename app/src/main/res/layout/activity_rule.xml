@@ -1,25 +1,1309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#191A1F"
         android:id="@+id/rule">
 
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#191A1F" />
 
-    <LinearLayout
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            >
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@android:color/transparent">
+
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/totalcard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="150dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="8dp"
+                    app:cardBackgroundColor="#222328"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#2D2E33"
+                    android:elevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1A84A1FF">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="24dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            app:strokeColor="#2D2E33"
+                            >
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:paddingHorizontal="30dp"
+                                android:paddingVertical="25dp"
+                                android:background="#2B2C31"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center_horizontal"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:id="@+id/yuanPangBalance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0 Ƶ"
+                                        android:textColor="#82B1FF"
+                                        android:textSize="50sp"
+                                        android:textStyle="bold"
+                                        style="@style/SystemFontTextView"
+                                        android:fontFamily="sans-serif-black"
+                                        android:layout_marginTop="10dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="8dp">
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/spendButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        style="@style/Widget.Material3.Button.IconButton.Filled"
+                                        android:backgroundTint="#0F1A24"
+                                        app:cornerRadius="24dp"
+                                        app:strokeWidth="2dp"
+                                        app:strokeColor="#5570CC"
+                                        app:icon="@drawable/ic_shopping_cart"
+                                        app:iconTint="#C7CBFF"
+                                        app:rippleColor="#C7CBFF"
+                                        android:layout_marginEnd="12dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/addButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        style="@style/Widget.Material3.Button.IconButton.Filled"
+                                        app:cornerRadius="24dp"
+                                        app:icon="@android:drawable/ic_input_add"
+                                        app:iconTint="#C7CBFF"
+                                        android:backgroundTint="#0F1A24"
+                                        app:strokeWidth="2dp"
+                                        app:strokeColor="#5570CC"
+                                        app:rippleColor="#C7CBFF"
+                                        android:layout_marginHorizontal="6dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/saveButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        style="@style/Widget.Material3.Button.IconButton.Filled"
+                                        android:backgroundTint="#0F1A24"
+                                        app:cornerRadius="24dp"
+                                        app:strokeWidth="2dp"
+                                        app:strokeColor="#5570CC"
+                                        app:icon="@drawable/atomic"
+                                        app:iconTint="#C7CBFF"
+                                        app:rippleColor="#C7CBFF"
+                                        android:layout_marginStart="12dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/viewSavingsRecordsButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        style="@style/Widget.Material3.Button.IconButton.Filled"
+                                        android:backgroundTint="#0F1A24"
+                                        app:cornerRadius="24dp"
+                                        app:strokeWidth="2dp"
+                                        app:strokeColor="#5570CC"
+                                        app:icon="@drawable/ic_book"
+                                        app:iconTint="#C7CBFF"
+                                        app:rippleColor="#C7CBFF"
+                                        android:layout_marginStart="12dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/main_container_background"
+                    android:paddingVertical="10dp">
+
+                <TextView
+                        android:id="@+id/yingyear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="莹历2000年 🍥 莹轩5年"
+                        android:textColor="#82B1FF"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp" />
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="@drawable/widget_background"
+                        android:paddingVertical="10dp"
+                        android:paddingHorizontal="15dp">
+
+                    <TextView
+                            android:id="@+id/totalYuanPang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="总计获得: 0 Ƶ"
+                            android:textColor="#82B1FF"
+                            android:textSize="14sp"
+                            android:layout_marginEnd="24dp" />
+
+                    <TextView
+                            android:id="@+id/penaltyCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="违法次数: 0 次"
+                            android:textColor="#82B1FF"
+                            android:textSize="14sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#222328"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#3949AB"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1A3949AB">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📜 《GML基本法》属性"
+                            android:textColor="#C7CBFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="16dp" />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 本法任何条例均不得删除、废止，仅每年2月1日时可对条例提出增补或改进。"
+                            android:textColor="#C7CBFF"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background"
+                            />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 本法对本人的约束力具有绝对性与至高性，且永久生效。"
+                            android:textColor="#C7CBFF"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background" />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 严禁任何违反本法之行为。任何不符合本法之行为，均属非法！"
+                            android:textColor="#C7CBFF"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background" />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 对于本法未明确禁止，但经自我裁定其行为动机或可能后果实质上违背本法根本原则的事项，有权临时裁定其为违规。"
+                            android:textColor="#C7CBFF"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background" />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 允许开发与基本法完全兼容的扩展包，但不得与基本法任何既有条款冲突。"
+                            android:textColor="#C7CBFF"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/ordinanceCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#222328"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EF9A9A"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1AEF9A9A">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚖️ 法令（点击标记违规/取消）"
+                            android:textColor="#FFEBEE"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="16dp" />
+
+                    <LinearLayout
+                            android:id="@+id/ordinanceContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/rewardCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#222328"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#66BB6A"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1A66BB6A">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🏆 奖赏（点击申领）"
+                            android:textColor="#E0F2F1"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="16dp" />
+
+                    <LinearLayout
+                            android:id="@+id/rewardContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 每年2月1日（莹轩日）与10月15日（抵抗日），自动获得 106莹钞。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimFixedReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申领"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        app:icon="@drawable/ic_monetization_on"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568">
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 一个月内无违规，奖励32莹钞。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimNoViolationReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申报"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_verified_user"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568">
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 若全年没有违反记录，次年1月1日奖励213莹钞。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimAnnualNoViolationReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申报"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_star"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 当月储蓄率超过71%，奖励64莹钞。"
+                                        android:textColor="#E0F2F1"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimSavingReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申报"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_trending_up"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 以连续35个自然日为一个周期，禁止masturbation。成功完成一个周期，奖励148莹钞。从第二个连续周期开始，每个周期的赏金为前一周期的1.1倍（即几何累进）。若周期中断，则计数重置，并进行奖金结算。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimAbstinenceReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="打卡"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_timer"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 每日完成训练组：高抬腿2分钟+25个俯卧撑+30次深蹲+40个臀桥+2分钟平板支撑+1分钟坐位体前屈+深呼吸2分钟。当日全部完成，奖励6莹钞；连续7天全勤，额外奖励42莹钞。月完成24天，额外奖励100莹钞。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimFitnessReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="打卡"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_fitness_center"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 阅读一本书并整理知识点，奖励等同书价莹钞（反迷信、哲学等额外+30莹钞）。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimReadingReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申领"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_book"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 学透任一数学、物理、化学、生物、现代医学知识点，可获得1莹钞奖励。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimLearningReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申领"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_school"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 成功完成有报酬外包项目，将净利润的5%折算为莹钞奖励。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimProjectReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申领"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_work"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 通过职业技能认证或资格考试，奖励350莹钞。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimCertificationReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申领"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_assignment_turned_in"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 独立完成数字产品并首次获得收入，奖励200莹钞。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimDigitalProductReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申领"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_devices_other"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 完成赏金≥20莹钞任务后，可进行博弈：抛硬币，正面赏金翻倍，反面归零（每月限一次）。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimGamblingReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="博弈"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_casino"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 每月1日生成双倍莹钞日，该日主动行为获得的莹钞奖励翻倍结算。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimDoubleReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="确认"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_double_arrow"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 每月完成随机彩蛋任务（探险、看电影等），获得30莹钞赏金。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimEggReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="完成"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_gift"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 遭遇不可抗力导致睡眠≤2小时、被迫失恋、生病等情况，可获得96莹钞抚慰金。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimComfortReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申领"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_sentiment_satisfied_alt"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 每增加一种稳定收入来源，奖励319莹钞。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimIncomeSourceReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申领"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_work"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="#800F172A"
+                                app:strokeColor="#4A5568"
+                                >
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:gravity="center_vertical">
+
+                                <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="• 当小G财指（总现金流/10）突破一个以100为单位的整数里程碑，奖励为指数值*0.005。"
+                                        android:textColor="#E8F5E9"
+                                        android:textSize="14sp"
+                                        android:lineSpacingMultiplier="1.3"
+                                        android:layout_marginEnd="16dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/claimWealthIndexReward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="申报"
+                                        style="@style/Widget.Material3.Button.ElevatedButton"
+                                        app:cornerRadius="16dp"
+                                        android:textColor="#1DE9B6"
+                                        android:backgroundTint="#000000"
+                                        app:strokeColor="#64FFDA"
+                                        app:strokeWidth="0.8dp"
+                                        app:iconTint="#64FFDA"
+                                        app:rippleColor="#64FFDA"
+                                        app:icon="@drawable/ic_trending_up"
+                                        app:iconGravity="textStart" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="24dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#222328"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#FFF9C4"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1AFFF9C4">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📝 备注"
+                            android:textColor="#FFFDE7"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="16dp" />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 所有处罚限3周以内完成，如若推迟，罚款以每天2%递增，最高不超过原罚款的2倍。"
+                            android:textColor="#FFFDE7"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 若身体情况特殊可免去体罚，以1.5倍罚款代替。"
+                            android:textColor="#FFFDE7"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 莹钞奖励可用于任何利于自身或家人的消费，但不得用于投机。"
+                            android:textColor="#FFFDE7"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• 负债、破产或发生重大亏损的情况下，莹钞奖励机制终止。"
+                            android:textColor="#FFFDE7"
+                            android:textSize="14sp"
+                            android:lineSpacingMultiplier="1.3"
+                            android:padding="12dp"
+                            android:background="@drawable/widget_background"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#222328"
+            app:strokeWidth="1dp"
+            app:strokeColor="#2D2E33"
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:rippleColor="#1A84A1FF"
+            android:layout_gravity="top">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingVertical="6dp">
+                android:padding="5dp">
 
             <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/walletname"
@@ -44,6 +1328,7 @@
                     app:iconSize="32dp"
                     app:strokeWidth="0dp"
                     app:backgroundTint="@android:color/transparent"
+                    app:rippleColor="#84A1FF"
                     android:clickable="true"
                     android:paddingHorizontal="0dp" />
 
@@ -57,6 +1342,7 @@
                     app:iconSize="29dp"
                     app:strokeWidth="0dp"
                     app:backgroundTint="@android:color/transparent"
+                    app:rippleColor="#84A1FF"
                     android:clickable="true"
                     android:paddingHorizontal="0dp" />
 
@@ -71,6 +1357,7 @@
                     app:iconSize="30dp"
                     app:strokeWidth="0dp"
                     app:backgroundTint="@android:color/transparent"
+                    app:rippleColor="#84A1FF"
                     android:clickable="true"
                     android:paddingHorizontal="0dp" />
 
@@ -84,1274 +1371,11 @@
                     app:iconSize="29dp"
                     app:strokeWidth="0dp"
                     app:backgroundTint="@android:color/transparent"
+                    app:rippleColor="#84A1FF"
                     android:layout_marginEnd="5dp"
                     android:clickable="true"
                     android:paddingHorizontal="0dp" />
         </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-
-        <!-- 顶部钱包信息卡片 -->
-        <com.google.android.material.card.MaterialCardView
-                android:id="@+id/totalcard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="12dp"
-                android:layout_marginHorizontal="10dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="#222328"
-                app:strokeWidth="1dp"
-                app:strokeColor="#2D2E33"
-                android:elevation="4dp">
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingVertical="24dp">
-
-                <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        app:strokeColor="#2D2E33"
-                        >
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:paddingHorizontal="30dp"
-                            android:paddingVertical="25dp"
-                            android:background="#2B2C31"
-                            >
-
-
-                    <!-- 莹钞余额 - 大字体 -->
-                    <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center_vertical">
-
-                        <TextView
-                                android:id="@+id/yuanPangBalance"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0 Ƶ"
-                                android:textColor="#82B1FF"
-                                android:textSize="50sp"
-                                android:textStyle="bold"
-                                style="@style/SystemFontTextView"
-                                android:fontFamily="sans-serif-black"
-                                android:layout_marginTop="10dp" />
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="8dp">
-
-                        <!-- 支出按钮 -->
-                        <com.google.android.material.button.MaterialButton
-                                android:id="@+id/spendButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                style="@style/Widget.Material3.Button.IconButton.Filled"
-                                android:backgroundTint="#0F1A24"
-                                app:cornerRadius="24dp"
-                                app:strokeWidth="2dp"
-                                app:strokeColor="#5570CC"
-                                app:icon="@drawable/ic_shopping_cart"
-                                app:iconTint="#C7CBFF"
-                                android:layout_marginEnd="12dp" />
-
-                        <com.google.android.material.button.MaterialButton
-                                android:id="@+id/addButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                style="@style/Widget.Material3.Button.IconButton.Filled"
-                                app:cornerRadius="24dp"
-                                app:icon="@android:drawable/ic_input_add"
-                                app:iconTint="#C7CBFF"
-                                android:backgroundTint="#0F1A24"
-                                app:strokeWidth="2dp"
-                                app:strokeColor="#5570CC"
-                                android:layout_marginHorizontal="6dp" />
-
-                        <com.google.android.material.button.MaterialButton
-                                android:id="@+id/saveButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                style="@style/Widget.Material3.Button.IconButton.Filled"
-                                android:backgroundTint="#0F1A24"
-                                app:cornerRadius="24dp"
-                                app:strokeWidth="2dp"
-                                app:strokeColor="#5570CC"
-                                app:icon="@drawable/atomic"
-                                app:iconTint="#C7CBFF"
-                                android:layout_marginStart="12dp" />
-
-                        <!-- 查看储蓄记录按钮 -->
-                        <com.google.android.material.button.MaterialButton
-                                android:id="@+id/viewSavingsRecordsButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                style="@style/Widget.Material3.Button.IconButton.Filled"
-                                android:backgroundTint="#0F1A24"
-                                app:cornerRadius="24dp"
-                                app:strokeWidth="2dp"
-                                app:strokeColor="#5570CC"
-                                app:icon="@drawable/ic_book"
-                                app:iconTint="#C7CBFF"
-                                android:layout_marginStart="12dp" />
-
-                    </LinearLayout>
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <!-- 总获得莹钞和处罚次数 -->
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_margin="12dp"
-                android:background="@drawable/main_container_background"
-                android:paddingVertical="10dp">
-
-            <TextView
-                    android:id="@+id/yingyear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="莹历2000年 🍥 莹轩5年"
-                    android:textColor="#82B1FF"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="12dp" />
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:background="@drawable/widget_background"
-                    android:paddingVertical="10dp"
-                    android:paddingHorizontal="15dp">
-
-                <TextView
-                        android:id="@+id/totalYuanPang"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="总计获得: 0 Ƶ"
-                        android:textColor="#82B1FF"
-                        android:textSize="14sp"
-                        android:layout_marginEnd="24dp" />
-
-                <TextView
-                        android:id="@+id/penaltyCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="违法次数: 0 次"
-                        android:textColor="#82B1FF"
-                        android:textSize="14sp" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-        <!-- 属性卡片 -->
- <com.google.android.material.card.MaterialCardView
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_margin="12dp"
-         app:cardCornerRadius="16dp"
-         app:cardElevation="4dp"
-         app:cardBackgroundColor="#222328"
-        app:strokeWidth="1dp"
-        app:strokeColor="#3949AB">
-        <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📜 《GML基本法》属性"
-                        android:textColor="#C7CBFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp" />
-
-                <!-- 属性内容列表 -->
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 本法任何条例均不得删除、废止，仅每年2月1日时可对条例提出增补或改进。"
-                        android:textColor="#C7CBFF"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:layout_marginBottom="12dp"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background"
-                        />
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 本法对本人的约束力具有绝对性与至高性，且永久生效。"
-                        android:textColor="#C7CBFF"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:layout_marginBottom="12dp"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background" />
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 严禁任何违反本法之行为。任何不符合本法之行为，均属非法！"
-                        android:textColor="#C7CBFF"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:layout_marginBottom="12dp"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background" />
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 对于本法未明确禁止，但经自我裁定其行为动机或可能后果实质上违背本法根本原则的事项，有权临时裁定其为违规。"
-                        android:textColor="#C7CBFF"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:layout_marginBottom="12dp"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background" />
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 允许开发与基本法完全兼容的扩展包，但不得与基本法任何既有条款冲突。"
-                        android:textColor="#C7CBFF"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background"/>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 法令卡片 -->
-        <com.google.android.material.card.MaterialCardView
-                android:id="@+id/ordinanceCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#222328"
-                app:strokeWidth="1dp"
-                app:strokeColor="#EF9A9A"
-                >
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="⚖️ 法令（点击标记违规/取消）"
-                        android:textColor="#FFEBEE"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp" />
-
-                <!-- 法令条目列表容器 -->
-                <LinearLayout
-                        android:id="@+id/ordinanceContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    <!-- 动态添加法令条目 -->
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 奖赏卡片 -->
-        <com.google.android.material.card.MaterialCardView
-                android:id="@+id/rewardCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#222328"
-                app:strokeWidth="1dp"
-                app:strokeColor="#66BB6A"
-                >
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🏆 奖赏（点击申领）"
-                        android:textColor="#E0F2F1"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp" />
-
-                <!-- 奖赏条目列表 -->
-                <LinearLayout
-                        android:id="@+id/rewardContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                    <!-- 固定奖励 - 每年2月1日与10月15日 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 每年2月1日（莹轩日）与10月15日（抵抗日），自动获得 106莹钞。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimFixedReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申领"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    app:icon="@drawable/ic_monetization_on"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 无违规奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568">
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 一个月内无违规，奖励32莹钞。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimNoViolationReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申报"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_verified_user"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 全年无违规奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568">
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 若全年没有违反记录，次年1月1日奖励213莹钞。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimAnnualNoViolationReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申报"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_star"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 储蓄率奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 当月储蓄率超过71%，奖励64莹钞。"
-                                    android:textColor="#E0F2F1"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimSavingReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申报"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_trending_up"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 禁欲周期奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 以连续35个自然日为一个周期，禁止masturbation。成功完成一个周期，奖励148莹钞。从第二个连续周期开始，每个周期的赏金为前一周期的1.1倍（即几何累进）。若周期中断，则计数重置，并进行奖金结算。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimAbstinenceReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="打卡"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_timer"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 健身奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 每日完成训练组：“高抬腿2分钟+25个俯卧撑+30次深蹲+40个臀桥+2分钟平板支撑+1分钟坐位体前屈+深呼吸2分钟”。当日全部完成，奖励6莹钞；连续7天全勤，额外奖励42莹钞。月完成24天，额外奖励100莹钞。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimFitnessReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="打卡"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_fitness_center"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 读书奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 阅读一本书并整理知识点，奖励等同书价莹钞（反迷信、哲学等额外+30莹钞）。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimReadingReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申领"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_book"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 学习奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 学透任一数学、物理、化学、生物、现代医学知识点，可获得1莹钞奖励。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimLearningReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申领"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_school"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 外包项目奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 成功完成有报酬外包项目，将净利润的5%折算为莹钞奖励。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimProjectReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申领"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_work"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 职业技能认证奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 通过职业技能认证或资格考试，奖励350莹钞。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimCertificationReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申领"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_assignment_turned_in"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 数字产品奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 独立完成数字产品并首次获得收入，奖励200莹钞。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimDigitalProductReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申领"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_devices_other"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 博弈奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 完成赏金≥20莹钞任务后，可进行博弈：抛硬币，正面赏金翻倍，反面归零（每月限一次）。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimGamblingReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="博弈"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_casino"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 双倍莹钞日奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 每月1日生成双倍莹钞日，该日主动行为获得的莹钞奖励翻倍结算。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimDoubleReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="确认"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_double_arrow"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 彩蛋任务奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 每月完成随机彩蛋任务（探险、看电影等），获得30莹钞赏金。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimEggReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="完成"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_gift"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 抚慰金奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 遭遇不可抗力导致睡眠≤2小时、被迫失恋、生病等情况，可获得96莹钞抚慰金。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimComfortReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申领"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_sentiment_satisfied_alt"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 增加收入来源奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 每增加一种稳定收入来源，奖励319莹钞。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimIncomeSourceReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申领"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_work"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 小G财指突破奖励 -->
-                    <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="#800F172A"
-                            app:strokeColor="#4A5568"
-                            >
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="16dp"
-                                android:gravity="center_vertical">
-
-                            <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="• 当小G财指（总现金流/10）突破一个以100为单位的整数里程碑，奖励为指数值*0.005。"
-                                    android:textColor="#E8F5E9"
-                                    android:textSize="14sp"
-                                    android:lineSpacingMultiplier="1.3"
-                                    android:layout_marginEnd="16dp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/claimWealthIndexReward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="申报"
-                                    style="@style/Widget.Material3.Button.ElevatedButton"
-                                    app:cornerRadius="16dp"
-                                    android:textColor="#1DE9B6"
-                                    android:backgroundTint="#000000"
-                                    app:strokeColor="#64FFDA"
-                                    app:strokeWidth="0.8dp"
-                                    app:iconTint="#64FFDA"
-                                    app:icon="@drawable/ic_trending_up"
-                                    app:iconGravity="textStart" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 备注卡片 -->
-        <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="24dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#222328"
-                app:strokeWidth="1dp"
-                app:strokeColor="#FFF9C4"
-                >
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📝 备注"
-                        android:textColor="#FFFDE7"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp" />
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 所有处罚限3周以内完成，如若推迟，罚款以每天2%递增，最高不超过原罚款的2倍。"
-                        android:textColor="#FFFDE7"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:layout_marginBottom="12dp"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background"/>
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 若身体情况特殊可免去体罚，以1.5倍罚款代替。"
-                        android:textColor="#FFFDE7"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:layout_marginBottom="12dp"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background"/>
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 莹钞奖励可用于任何利于自身或家人的消费，但不得用于投机。"
-                        android:textColor="#FFFDE7"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:layout_marginBottom="12dp"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background"/>
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="• 负债、破产或发生重大亏损的情况下，莹钞奖励机制终止。"
-                        android:textColor="#FFFDE7"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.3"
-                        android:padding="12dp"
-                        android:background="@drawable/widget_background"/>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-</ScrollView>
+</FrameLayout>
