@@ -20,6 +20,7 @@ import tz.yx.gml.R
 import tz.yx.gml.databinding.ActivityRuleBinding
 import tz.yx.gml.utils.DataExportImportUtils
 import kotlin.random.Random
+import androidx.core.graphics.toColorInt
 
 
 class YxActivity : AppCompatActivity() {
@@ -694,19 +695,21 @@ class YxActivity : AppCompatActivity() {
         }
         cardView.layoutParams = layoutParams
 
-        cardView.apply {
-            radius = dpToPx(12).toFloat()  // 修复：转换为Float
-            cardElevation = dpToPx(2).toFloat()  // 修复：转换为Float
-            setCardBackgroundColor(
-                if (isViolated) Color.parseColor("#FFCDD2") else Color.parseColor(
-                    "#FFEBEE"
-                )
-            )
-            strokeWidth = 1
-            strokeColor = getColor(android.R.color.darker_gray)
-            isClickable = true
-            isFocusable = true
-        }
+       cardView.apply {
+    radius = dpToPx(12).toFloat()
+    cardElevation = dpToPx(2).toFloat()
+    setCardBackgroundColor(
+        if (isViolated) "#800F172A".toColorInt() else Color.parseColor(
+            "#800F172A"
+        )
+    )
+    strokeWidth = 2
+    strokeColor = Color.parseColor("#4A5568")
+    isClickable = true
+    isFocusable = true
+}
+
+
 
         // 创建卡片内部的线性布局
         val linearLayout = android.widget.LinearLayout(this).apply {
@@ -719,7 +722,7 @@ class YxActivity : AppCompatActivity() {
         val textView = android.widget.TextView(this).apply {
             text = ordinanceText
             setTextColor(
-                if (isViolated) Color.parseColor("#D32F2F") else getColor(android.R.color.secondary_text_light)
+                if (isViolated) Color.parseColor("#D32F2F") else Color.parseColor("#FFEBEE")
             )
             setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 14f)
             val textViewLayoutParams = android.widget.LinearLayout.LayoutParams(
@@ -729,7 +732,7 @@ class YxActivity : AppCompatActivity() {
                 weight = 1f
                 setMargins(0, 0, dpToPx(16), 0)
             }
-            this.layoutParams = textViewLayoutParams  // 修复：使用this.layoutParams而不是直接赋值给val变量
+            this.layoutParams = textViewLayoutParams
         }
 
         // 创建状态图标
@@ -738,10 +741,10 @@ class YxActivity : AppCompatActivity() {
                 if (isViolated) R.drawable.ic_cancel else R.drawable.ic_check_circle_outline
             )
             setColorFilter(
-                if (isViolated) Color.parseColor("#D32F2F") else Color.parseColor("#388E3C")
+                if (isViolated) Color.parseColor("#D32F2F") else Color.parseColor("#84A1FF")
             )
             val iconLayoutParams = android.widget.LinearLayout.LayoutParams(dpToPx(28), dpToPx(28))
-            this.layoutParams = iconLayoutParams  // 修复：使用this.layoutParams而不是直接赋值给val变量
+            this.layoutParams = iconLayoutParams
         }
 
         // 添加点击事件

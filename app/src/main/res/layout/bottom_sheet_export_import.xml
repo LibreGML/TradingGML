@@ -13,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/homebg"
             android:padding="24dp">
 
 
@@ -26,11 +25,10 @@
                 android:text="导出数据"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#58B5FF"
+                android:textColor="#82B1FF"
                 app:cornerRadius="28dp"
                 style="@style/Widget.Material3.Button.TonalButton"
-                android:backgroundTint="#FFF"
-                app:rippleColor="#84A1FF"
+                app:rippleColor="#82B1FF"
                 android:elevation="14dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -41,11 +39,10 @@
                 android:text="导入数据"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#58B5FF"
+                android:textColor="#82B1FF"
                 app:cornerRadius="28dp"
                 style="@style/Widget.Material3.Button.TonalButton"
-                android:backgroundTint="#FFF"
-                app:rippleColor="#84A1FF"
+                app:rippleColor="#82B1FF"
                 android:elevation="14dp"
 
                 />

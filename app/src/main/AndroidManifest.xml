@@ -132,7 +132,9 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".homefrag.YxActivity"
-            android:exported="false" />
+            android:exported="false"
+                android:theme="@style/Theme.TradingGML.DarkActivity"
+                />
         <activity
             android:name=".homefrag.MainActivity"
             android:exported="true"

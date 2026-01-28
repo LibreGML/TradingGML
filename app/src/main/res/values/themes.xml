@@ -1,8 +1,7 @@
+<!-- values/themes.xml -->
 <resources>
-    <!-- Base application theme. -->
     <style name="Base.Theme.TradingGML" parent="Theme.Material3.Light.NoActionBar">
         <item name="fontFamily">@font/gml</item>
-
     </style>
 
     <style name="SystemFontTextView">
@@ -11,4 +10,8 @@
     </style>
 
     <style name="Theme.TradingGML" parent="Base.Theme.TradingGML" />
+
+    <style name="Theme.TradingGML.DarkActivity" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="fontFamily">@font/gml</item>
+    </style>
 </resources>
