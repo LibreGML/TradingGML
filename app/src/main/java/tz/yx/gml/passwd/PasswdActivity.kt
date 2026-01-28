@@ -99,7 +99,7 @@ class PasswdActivity : AppCompatActivity() {
     private fun showFingerprintAuthentication() {
         fingerprintManager.showFingerprintPrompt(
             this,
-            "密码管理器解锁",
+            "芝麻开门哈哈～",
             onSuccess = {
                 isFingerprintAuthenticated = true
                 initializeActivity()

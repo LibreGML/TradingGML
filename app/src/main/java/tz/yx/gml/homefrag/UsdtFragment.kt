@@ -54,45 +54,36 @@ class UsdtFragment : Fragment() {
 
     private fun calculateProfit() {
         try {
-            // 获取输入值
             val buyPriceText = binding.mymoney.text.toString()
             val buyAmountText = binding.contractSize.text.toString()
             val sellPriceText = binding.lever.text.toString()
             val feeText = binding.stopprice.text.toString()
 
-            // 检查是否有空值
-            if (buyPriceText.isEmpty() || buyAmountText.isEmpty() || 
+            if (buyPriceText.isEmpty() || buyAmountText.isEmpty() ||
                 sellPriceText.isEmpty() || feeText.isEmpty()) {
                 binding.shouldpos.text = "请输入所有数值"
                 return
             }
 
-            // 转换为BigDecimal进行精确计算
             val buyPrice = BigDecimal(buyPriceText)
             val buyAmountCNY = BigDecimal(buyAmountText)
             val sellPrice = BigDecimal(sellPriceText)
             val networkFee = BigDecimal(feeText)
 
-            // 检查输入值是否为正数
-            if (buyPrice <= BigDecimal.ZERO || buyAmountCNY <= BigDecimal.ZERO || 
+            if (buyPrice <= BigDecimal.ZERO || buyAmountCNY <= BigDecimal.ZERO ||
                 sellPrice <= BigDecimal.ZERO || networkFee < BigDecimal.ZERO) {
                 binding.shouldpos.text = "请输入有效的数值"
                 return
             }
 
-            // 计算买入的USDT数量 (买入金额 / 买入价格) - 截断到小数点后2位
             val buyAmountUSD = buyAmountCNY.divide(buyPrice, 2, RoundingMode.DOWN)
             
-            // 计算卖出获得的CNY金额 (卖出价格 * USDT数量) - 截断到小数点后2位
             val sellAmountCNY = sellPrice.multiply(buyAmountUSD).setScale(2, RoundingMode.DOWN)
             
-            // 计算网络手续费对应的CNY价值 (手续费USDT * 卖出价格) - 截断到小数点后2位
             val feeInCNY = networkFee.multiply(sellPrice).setScale(2, RoundingMode.DOWN)
             
-            // 计算盈亏 (卖出获得的CNY - 买入花费的CNY - 手续费)
             val profitOrLoss = sellAmountCNY.subtract(buyAmountCNY).subtract(feeInCNY)
             
-            // 格式化显示结果
             val resultText = when {
                 profitOrLoss > BigDecimal.ZERO -> {
                     "盈利: ${profitOrLoss.abs()} CNY"

@@ -60,33 +60,27 @@ class RiskFragment : Fragment() {
             
             val isBuy = binding.positionType.checkedButtonId != R.id.sellButton
             
-            // 计算价格风险
             val priceRisk = if (isBuy) {
                 entryPrice.subtract(stopprice)
             } else {
                 stopprice.subtract(entryPrice)
             }.abs()
             
-            // 计算单手损失
             val oneHandLose = contractSize.multiply(priceRisk)
             
-            // 如果价格风险为0，无法计算
             if (priceRisk.compareTo(BigDecimal.ZERO) == 0) {
                 binding.shouldpos.text = "无法计算"
                 return
             }
             
-            // 推荐手数 = 可承受损失 / 单手损失
             val shouldPos = acceptlose.divide(oneHandLose, 4, RoundingMode.HALF_UP)
             
-            // 保证金限制手数 = 账户余额 / ((开仓价 * 合约规模) / 杠杆)
             val marginLimit = if (lever.compareTo(BigDecimal.ZERO) > 0) {
                 mymoney.multiply(lever).divide(entryPrice.multiply(contractSize), 4, RoundingMode.HALF_UP)
             } else {
                 BigDecimal.ZERO
             }
             
-            // 取较小值作为最终推荐手数
             val finalPos = shouldPos.min(marginLimit)
             
             binding.shouldpos.text = "${finalPos.setScale(2, RoundingMode.HALF_UP)} 手"

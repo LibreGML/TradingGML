@@ -177,14 +177,16 @@ private fun setupViewPager() {
 
         val passwordFingerprintSwitch = view.findViewById<SwitchMaterial>(R.id.password_fingerprint_switch)
         val noteFingerprintSwitch = view.findViewById<SwitchMaterial>(R.id.note_fingerprint_switch)
+        val ruleFingerprintSwitch = view.findViewById<SwitchMaterial>(R.id.baserule_fingerprint_switch)
 
         passwordFingerprintSwitch.isChecked = sharedPreferences.getBoolean("password_fingerprint_enabled", false)
         noteFingerprintSwitch.isChecked = sharedPreferences.getBoolean("note_fingerprint_enabled", false)
+        ruleFingerprintSwitch.isChecked = sharedPreferences.getBoolean("rule_fingerprint_enabled", false)
 
         if (!fingerprintManager.isFingerprintAvailable()) {
             passwordFingerprintSwitch.isEnabled = false
             noteFingerprintSwitch.isEnabled = false
-            // 显示提示信息
+            ruleFingerprintSwitch.isEnabled = false
             Toast.makeText(this, "您的设备不支持指纹哦~", Toast.LENGTH_SHORT).show()
         }
 
@@ -210,6 +212,19 @@ private fun setupViewPager() {
             
             with(sharedPreferences.edit()) {
                 putBoolean("note_fingerprint_enabled", isChecked)
+                apply()
+            }
+        }
+
+        ruleFingerprintSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (!fingerprintManager.isFingerprintAvailable() && isChecked) {
+                ruleFingerprintSwitch.isChecked = false
+                Toast.makeText(this, "您的设备不支持指纹哦~", Toast.LENGTH_SHORT).show()
+                return@setOnCheckedChangeListener
+            }
+
+            with(sharedPreferences.edit()) {
+                putBoolean("rule_fingerprint_enabled", isChecked)
                 apply()
             }
         }

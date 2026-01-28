@@ -21,14 +21,18 @@ import tz.yx.gml.databinding.ActivityRuleBinding
 import tz.yx.gml.utils.DataExportImportUtils
 import kotlin.random.Random
 import androidx.core.graphics.toColorInt
+import tz.yx.gml.utils.FingerprintManager
 
 
 class YxActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRuleBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var settingsPrefs: SharedPreferences  // 用于读取指纹设置等全局设置
     private lateinit var dataExportImportUtils: DataExportImportUtils
+    private lateinit var fingerprintManager: FingerprintManager
     private lateinit var importFileLauncher: ActivityResultLauncher<String>
+    private var isFingerprintAuthenticated = false
 
     // 添加货币类型枚举
     companion object {
@@ -61,7 +65,8 @@ class YxActivity : AppCompatActivity() {
                 insets
             }
 
-
+            fingerprintManager = FingerprintManager(this)
+            
             // 初始化文件选择器
             importFileLauncher =
                 registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -72,26 +77,12 @@ class YxActivity : AppCompatActivity() {
 
             // 初始化SharedPreferences
             sharedPreferences = getSharedPreferences("YxData", MODE_PRIVATE)
+            settingsPrefs = getSharedPreferences("app_settings", MODE_PRIVATE)
             dataExportImportUtils = DataExportImportUtils(this)
 
+            // 检查是否需要指纹验证
+            checkFingerprintUnlock()
 
-            // 加载数据
-            loadData()
-
-            // 设置监听器
-            setupListeners()
-
-            // 设置法令条目点击事件
-            setupOrdinanceClickEvents()
-
-            // 设置奖赏按钮点击事件
-            setupRewardClickEvents()
-
-            // 初始化法令状态
-            updateOrdinanceStatus()
-
-            // 更新莹历显示
-            updateYingYearDisplay()
         } catch (e: Exception) {
             // 如果初始化失败，显示错误信息
             MaterialAlertDialogBuilder(this)
@@ -101,6 +92,59 @@ class YxActivity : AppCompatActivity() {
                 .show()
         }
     }
+
+
+    private fun checkFingerprintUnlock() {
+        val isFingerprintEnabled = settingsPrefs.getBoolean("rule_fingerprint_enabled", false)
+        if (isFingerprintEnabled && fingerprintManager.isFingerprintAvailable() && !isFingerprintAuthenticated) {
+            showFingerprintAuthentication()
+        } else {
+            initializeActivity()
+        }
+    }
+
+    private fun showFingerprintAuthentication() {
+        fingerprintManager.showFingerprintPrompt(
+            this,
+            "芝麻开门哈哈～",
+            onSuccess = {
+                isFingerprintAuthenticated = true
+                initializeActivity()
+            },
+            onFailure = {
+                // 认证失败则返回MainActivity
+                val intent = android.content.Intent(this, tz.yx.gml.homefrag.MainActivity::class.java)
+                intent.flags = android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            }
+        )
+    }
+
+    private fun initializeActivity() {
+        loadData()
+        // 设置监听器
+        setupListeners()
+
+        // 设置法令条目点击事件
+        setupOrdinanceClickEvents()
+
+        // 设置奖赏按钮点击事件
+        setupRewardClickEvents()
+
+        // 初始化法令状态
+        updateOrdinanceStatus()
+
+        // 更新莹历显示
+        updateYingYearDisplay()
+        
+        // 检查是否有到期的储蓄并处理
+        checkAndProcessExpiredSavings()
+        
+        // 确保货币类型显示正确初始化
+        updateCurrencyDisplay(sharedPreferences.getString("selected_currency", CURRENCY_YUAN_PANG) ?: CURRENCY_YUAN_PANG)
+    }
+
 
     private fun loadData() {
         val balance = sharedPreferences.getInt("yuan_pang_balance", 0)

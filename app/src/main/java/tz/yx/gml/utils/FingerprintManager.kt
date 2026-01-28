@@ -17,6 +17,7 @@ class FingerprintManager(private val context: Context) {
     companion object {
         const val PASSWORD_FINGERPRINT_KEY = "password_fingerprint_enabled"
         const val NOTE_FINGERPRINT_KEY = "note_fingerprint_enabled"
+        const val RULE_FINGERPRINT_KEY = "rule_fingerprint_enabled"
     }
 
     fun isPasswordFingerprintEnabled(): Boolean {
@@ -26,6 +27,9 @@ class FingerprintManager(private val context: Context) {
     fun isNoteFingerprintEnabled(): Boolean {
         return sharedPreferences.getBoolean(NOTE_FINGERPRINT_KEY, false)
     }
+    fun isRuleFingerprintEnabled(): Boolean {
+        return sharedPreferences.getBoolean(RULE_FINGERPRINT_KEY, false)
+    }
 
     fun setPasswordFingerprintEnabled(enabled: Boolean) {
         sharedPreferences.edit { putBoolean(PASSWORD_FINGERPRINT_KEY, enabled) }
@@ -33,6 +37,9 @@ class FingerprintManager(private val context: Context) {
 
     fun setNoteFingerprintEnabled(enabled: Boolean) {
         sharedPreferences.edit { putBoolean(NOTE_FINGERPRINT_KEY, enabled)}
+    }
+    fun setRuleFingerprintEnabled(enabled: Boolean) {
+        sharedPreferences.edit { putBoolean(RULE_FINGERPRINT_KEY, enabled)}
     }
 
     /**
