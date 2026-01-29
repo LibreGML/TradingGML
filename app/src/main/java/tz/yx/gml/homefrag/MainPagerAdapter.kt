@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class MainPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = 5
     
     override fun createFragment(position: Int): Fragment {
         return when (position) {
@@ -14,6 +14,7 @@ class MainPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
             1 -> RiskFragment()
             2 -> UsdtFragment()
             3 -> StockFragment()
+            4 -> foreverFragment()
             else -> ProfitFragment()
         }
     }

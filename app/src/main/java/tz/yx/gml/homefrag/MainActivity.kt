@@ -95,6 +95,7 @@ private fun setupViewPager() {
             1 -> tab.text = "风险控制"
             2 -> tab.text = "USDT交易"
             3 -> tab.text = "股票补仓"
+            4 -> tab.text = "永久组合"
         }
     }.attach()
 }
@@ -233,4 +234,3 @@ private fun setupViewPager() {
 
 
 }
-

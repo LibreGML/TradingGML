@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="TradingGML">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-01-28T08:10:08.174476124Z">
+        <DropdownSelection timestamp="2026-01-29T08:33:56.952346314Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="PhysicalDevice" identifier="serial=90429cc0" />

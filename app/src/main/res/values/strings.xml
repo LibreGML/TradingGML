@@ -16,5 +16,7 @@
     <string name="shortcut_passwd_short_label">✨ 密码记录器</string>
     <string name="shortcut_passwd_long_label">✨ 密码记录器</string>
     <string name="shortcut_passwd_disabled_message">✨ 密码记录器不可用</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

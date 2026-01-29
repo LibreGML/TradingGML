@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:padding="15dp"
+            >
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:alpha="0.72"
+            android:clickable="true"
+            android:focusable="true"
+            app:rippleColor="#1A84A1FF"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🏦 永久投资组合"
+                    android:textColor="#35A0FF"
+                    android:textSize="16.5sp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:layout_marginBottom="6dp" />
+
+                <View
+                    android:layout_width="130dp"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/div" />
+
+                <!-- 总投资金额 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="💰 总投资金额"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/totalInvestment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📊 当前持仓金额输入"
+                    android:textColor="#35A0FF"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- 各资产当前持仓金额输入 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="🏦 现金(国债逆回购)金额"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/reverseRepoAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="📈 股票(标普500ETF)金额"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sp500EtfAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="💼 股票(现金流ETF)金额"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cashFlowEtfAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="📊 债券(10年国债)金额"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/treasury10yAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="🥇 商品(黄金ETF)金额"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/goldEtfAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="➕ 追加投资金额"
+                    android:textColor="#35A0FF"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="💰 计划追加投资金额"
+                    app:hintTextColor="#84A1FF"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#84A1FF"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="#84A1FF"
+                    android:textColorHint="#84A1FF"
+                    android:layout_marginBottom="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/additionalInvestment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:textColor="#0A1A55"
+                        android:textSize="13.5sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📈 当前配置情况"
+                    android:textColor="#35A0FF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1A84A1FF"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="1dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#E0E0E0">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- 表头 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#E3F2FD"
+                            android:orientation="horizontal"
+                            android:paddingVertical="12dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="资产类别"
+                                android:textColor="#1976D2"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="目标比例"
+                                android:textColor="#1976D2"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="当前金额"
+                                android:textColor="#1976D2"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="当前占比"
+                                android:textColor="#1976D2"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- 逆回购行 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="10dp"
+                            android:background="#FFFFFF">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:drawablePadding="8dp"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="逆回购"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="25%"
+                                android:textColor="#4CAF50"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/reverseRepoValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/reverseRepoRatio"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- 标普500行 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="10dp"
+                            android:background="#E3F2FD">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:drawablePadding="8dp"
+                                    android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="标普500"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="15%"
+                                android:textColor="#4CAF50"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/sp500EtfValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/sp500EtfRatio"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- 现金流ETF行 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="10dp"
+                            android:background="#FFFFFF">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:drawablePadding="8dp"
+                                    android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="现金流ETF"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="10%"
+                                android:textColor="#4CAF50"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/cashFlowEtfValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/cashFlowEtfRatio"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- 10年国债行 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="10dp"
+                            android:background="#E3F2FD">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:drawablePadding="8dp"
+                                    android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="10年国债"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="25%"
+                                android:textColor="#4CAF50"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/treasury10yValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/treasury10yRatio"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- 黄金ETF行 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingVertical="10dp"
+                            android:background="#FFFFFF">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:drawablePadding="8dp"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="黄金ETF"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:text="25%"
+                                android:textColor="#4CAF50"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/goldEtfValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/goldEtfRatio"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="#212121"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 实际总金额卡片 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1A84A1FF"
+                        app:cardCornerRadius="20dp"
+                        android:backgroundTint="@color/blue_100"
+                   >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="💰 实际总金额"
+                            android:textColor="#212121"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/totalCurrentValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.00 元"
+                            android:textColor="#84A1FF"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 调仓建议卡片 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1A84A1FF"
+                        app:cardCornerRadius="20dp"
+                        android:backgroundTint="@color/blue_100"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="🔄 调仓建议"
+                            android:textColor="#212121"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/rebalancingAdvice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="40dp"
+                            android:text="请输入投资金额和各资产持仓金额"
+                            android:textColor="#666666"
+                            android:textSize="13sp"
+                            android:background="?android:attr/selectableItemBackground" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 追加投资分配建议卡片 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:rippleColor="#1A84A1FF"
+                    app:cardCornerRadius="20dp"
+                        android:backgroundTint="@color/blue_100"
+                        >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="📈 追加投资分配建议"
+                            android:textColor="#212121"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/additionalInvestmentAdvice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="40dp"
+                            android:text="追加投资分配建议将在此显示"
+                            android:textColor="#666666"
+                            android:textSize="13sp"
+                            android:background="?android:attr/selectableItemBackground" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
