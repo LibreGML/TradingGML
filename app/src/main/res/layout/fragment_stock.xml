@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,7 +30,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="📋 补仓信息"
+                    android:text="📋 ETF补仓信息"
                     android:textColor="#35A0FF"
                     android:textSize="16.5sp"
                     android:textStyle="bold"
@@ -76,7 +76,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="📈 初买数/股"
+                    android:hint="📈 初买份数"
                     app:hintTextColor="#84A1FF"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#84A1FF"
@@ -136,7 +136,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="📉 补仓数/股"
+                    android:hint="📉 补仓份数"
                     app:hintTextColor="#84A1FF"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#84A1FF"
@@ -166,7 +166,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="🧮 手续费(万分之)"
+                    android:hint="🧮 佣金费率(万分之)"
                     app:hintTextColor="#84A1FF"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#84A1FF"
@@ -196,7 +196,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="🏵 印花税(%)"
+                    android:hint="🏵 印花税率(%) - ETF免征"
                     app:hintTextColor="#84A1FF"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#84A1FF"
@@ -226,7 +226,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="💳️ 过户费(%)"
+                    android:hint="💳️ 过户费率(%) - ETF无此项"
                     app:hintTextColor="#84A1FF"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#84A1FF"
@@ -307,7 +307,7 @@
                         android:id="@+id/finalCostValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CNY"
+                        android:text="CNY/份"
                         android:textColor="#00B5FF"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -337,7 +337,7 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
-                <!-- 目前总股数 -->
+                <!-- 目前总份数 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -348,7 +348,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="目前总股数"
+                        android:text="目前总份数"
                         android:textColor="#2EAAFF"
                         android:textSize="15sp" />
 
@@ -356,7 +356,7 @@
                         android:id="@+id/totalQuantityValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="股"
+                        android:text="份"
                         android:textColor="#00B5FF"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -366,4 +366,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

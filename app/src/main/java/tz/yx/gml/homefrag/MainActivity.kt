@@ -69,14 +69,15 @@ class MainActivity : AppCompatActivity() {
 private fun setupViewPager() {
     val adapter = MainPagerAdapter(this)
     binding.viewPager.adapter = adapter
-    binding.viewPager.setPageTransformer { page, position ->
-        page.apply {
-            translationX = -position * width
-            alpha = 1 - kotlin.math.abs(position)
-            scaleX = 0.7f + 0.3f * (1 - kotlin.math.abs(position))
-            scaleY = 0.7f + 0.3f * (1 - kotlin.math.abs(position))
-        }
-    }
+    // 一个好看的动画，但是会导致控件无法点击
+//    binding.viewPager.setPageTransformer { page, position ->
+//        page.apply {
+//            translationX = -position * width
+//            alpha = 1 - kotlin.math.abs(position)
+//            scaleX = 0.7f + 0.3f * (1 - kotlin.math.abs(position))
+//            scaleY = 0.7f + 0.3f * (1 - kotlin.math.abs(position))
+//        }
+//    }
     try {
         val recyclerView = binding.viewPager.getChildAt(0)
         val recyclerViewClass = recyclerView.javaClass
@@ -91,11 +92,11 @@ private fun setupViewPager() {
     }
     TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
         when (position) {
-            0 -> tab.text = "合约收益"
-            1 -> tab.text = "风险控制"
-            2 -> tab.text = "USDT交易"
-            3 -> tab.text = "股票补仓"
-            4 -> tab.text = "永久组合"
+            0 -> tab.text = "CFD收益"
+            1 -> tab.text = "利率转换"
+            2 -> tab.text = "财务波动率"
+            3 -> tab.text = "ETF补仓"
+            4 -> tab.text = "永久投资组合"
         }
     }.attach()
 }

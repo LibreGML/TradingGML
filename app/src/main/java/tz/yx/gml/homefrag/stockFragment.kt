@@ -28,6 +28,10 @@ class StockFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupInputListeners()
+        
+        // 初始化默认值为ETF常见费率（ETF通常免印花税，无过户费）
+        binding.stampDutyRate.setText("0")  // ETF免印花税
+        binding.transferFeeRate.setText("0")  // ETF无过户费
     }
 
     private fun setupInputListeners() {
@@ -97,7 +101,7 @@ class StockFragment : Fragment() {
             with(binding) {
                 "${finalCost.setScale(4, RoundingMode.DOWN)} CNY/股".also { finalCostValue.text = it }
                 "${currentProfit.setScale(2, RoundingMode.DOWN)} CNY".also { currentProfitValue.text = it }
-                "${totalQuantity.setScale(0, RoundingMode.DOWN)} 股".also { totalQuantityValue.text = it }
+                "${totalQuantity.setScale(0, RoundingMode.DOWN)} 份".also { totalQuantityValue.text = it }
             }
         } catch (e: Exception) {
             resetResultFields()
@@ -108,7 +112,7 @@ class StockFragment : Fragment() {
         with(binding) {
             "CNY/股".also { finalCostValue.text = it }
             "CNY".also { currentProfitValue.text = it }
-            "股".also { totalQuantityValue.text = it }
+            "份".also { totalQuantityValue.text = it }
         }
     }
 

@@ -12,7 +12,7 @@ class MainPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
         return when (position) {
             0 -> ProfitFragment()
             1 -> RiskFragment()
-            2 -> UsdtFragment()
+            2 -> vixFragment()
             3 -> StockFragment()
             4 -> foreverFragment()
             else -> ProfitFragment()
