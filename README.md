@@ -40,8 +40,9 @@ TradingGML是一款专注于金融交易计算的Android应用，主要提供多
 - **财务波动率计算器**: 分析月度收支波动，计算储蓄系数
 - **ETF补仓计算器**: 计算ETF补仓后的平均成本和盈亏
 - **永久投资组合**: 资产配置分析与调仓建议
+![calculator](https://github.com/user-attachments/assets/23566a9f-1d95-4b9d-a19f-0927d37d6c26)
 
-![num](https://github.com/user-attachments/assets/9a500d55-1b8c-4834-be9c-e3c6b13db4cb)
+![home](https://github.com/user-attachments/assets/9a32f673-725a-4e0c-abaa-733d79a937a4)
 
 ### 2. 附加功能
 
@@ -56,8 +57,13 @@ TradingGML是一款专注于金融交易计算的Android应用，主要提供多
 
 #### 笔记与密码管理
 - **Markdown笔记**: 支持Markdown格式的笔记编辑和预览
-- **密码管理器**: 安全存储各类账户密码信息
-- **数据备份**: 提供导入导出功能
+![markdown](https://github.com/user-attachments/assets/c6594cb1-60ff-4189-8c86-cab7d3011d77)
+
+![note](https://github.com/user-attachments/assets/d338a6d1-d5f2-476d-b02d-69373f8961ad)
+
+
+
+- **密码管理器**: 安全存储各类账户密码信息,提供导入导出功能
 
 ![password](https://github.com/user-attachments/assets/c5e43027-7035-4515-861a-0be09c8d6627)
 
