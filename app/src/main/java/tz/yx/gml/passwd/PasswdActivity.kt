@@ -1,6 +1,5 @@
 package tz.yx.gml.passwd
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
@@ -8,8 +7,7 @@ import android.os.Environment
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.MotionEvent
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
@@ -35,11 +33,9 @@ import tz.yx.gml.utils.FingerprintManager
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
-import java.io.OutputStreamWriter
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import android.view.MotionEvent
 
 class PasswdActivity : AppCompatActivity() {
 
@@ -68,9 +64,10 @@ class PasswdActivity : AppCompatActivity() {
         }
 
         // 初始化文件选择器
-        selectFileLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uri?.let { importPasswordsFromFile(it) }
-        }
+        selectFileLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                uri?.let { importPasswordsFromFile(it) }
+            }
 
         // 初始化指纹管理器和SharedPreferences
         fingerprintManager = FingerprintManager(this)
@@ -85,7 +82,8 @@ class PasswdActivity : AppCompatActivity() {
      */
     private fun checkFingerprintUnlock() {
         // 使用与SettingActivity中相同的键值
-        val isFingerprintEnabled = sharedPreferences.getBoolean("password_fingerprint_enabled", false)
+        val isFingerprintEnabled =
+            sharedPreferences.getBoolean("password_fingerprint_enabled", false)
         if (isFingerprintEnabled && fingerprintManager.isFingerprintAvailable() && !isFingerprintAuthenticated) {
             showFingerprintAuthentication()
         } else {
@@ -106,8 +104,10 @@ class PasswdActivity : AppCompatActivity() {
             },
             onFailure = {
                 // 认证失败则返回MainActivity
-                val intent = android.content.Intent(this, tz.yx.gml.homefrag.MainActivity::class.java)
-                intent.flags = android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+                val intent =
+                    android.content.Intent(this, tz.yx.gml.homefrag.MainActivity::class.java)
+                intent.flags =
+                    android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()
             }
@@ -199,7 +199,8 @@ class PasswdActivity : AppCompatActivity() {
                 PasswordItem::class.java
             ).type
 
-            val loadedList: MutableList<PasswordItem> = gson.fromJson(passwordJson, listType) ?: mutableListOf()
+            val loadedList: MutableList<PasswordItem> =
+                gson.fromJson(passwordJson, listType) ?: mutableListOf()
             passwordList.clear()
             passwordList.addAll(loadedList)
 
@@ -276,10 +277,12 @@ class PasswdActivity : AppCompatActivity() {
                         mimeType?.startsWith("text/comma-separated-values") == true -> {
                     importPasswordsFromCsv(uri)
                 }
+
                 fileName.endsWith(".json", ignoreCase = true) ||
                         mimeType?.startsWith("application/json") == true -> {
                     importPasswordsFromJson(uri)
                 }
+
                 else -> {
                     // 尝试根据内容判断文件类型
                     try {
@@ -297,7 +300,11 @@ class PasswdActivity : AppCompatActivity() {
                             }
                         }
                     } catch (e: Exception) {
-                        Toast.makeText(this, "无法识别文件格式，请确保是CSV或JSON格式", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            "无法识别文件格式，请确保是CSV或JSON格式",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -350,7 +357,11 @@ class PasswdActivity : AppCompatActivity() {
                     filterPasswords(binding.searchPwd.text.toString())
                     updateExportButtonState()
 
-                    Toast.makeText(this, "成功导入 ${exportData.passwords.size} 条密码记录", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "成功导入 ${exportData.passwords.size} 条密码记录",
+                        Toast.LENGTH_LONG
+                    ).show()
                 } else {
                     Toast.makeText(this, "导入文件格式不正确", Toast.LENGTH_LONG).show()
                 }
@@ -358,7 +369,8 @@ class PasswdActivity : AppCompatActivity() {
                 Toast.makeText(this, "无法读取文件", Toast.LENGTH_LONG).show()
             }
         } catch (e: SecurityException) {
-            Toast.makeText(this, "导入失败：没有存储权限，请在设置中授予存储权限", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "导入失败：没有存储权限，请在设置中授予存储权限", Toast.LENGTH_LONG)
+                .show()
         } catch (e: Exception) {
             Toast.makeText(this, "导入失败: ${e.message}", Toast.LENGTH_LONG).show()
         }
@@ -413,8 +425,13 @@ class PasswdActivity : AppCompatActivity() {
                     !headers[0].unquote().trim().equals("平台", true) ||
                     !headers[1].unquote().trim().equals("账户", true) ||
                     !headers[2].unquote().trim().equals("密码", true) ||
-                    !headers[3].unquote().trim().equals("备注", true)) {
-                    Toast.makeText(this, "CSV文件标题行格式不正确，应为: 平台,账户,密码,备注", Toast.LENGTH_LONG).show()
+                    !headers[3].unquote().trim().equals("备注", true)
+                ) {
+                    Toast.makeText(
+                        this,
+                        "CSV文件标题行格式不正确，应为: 平台,账户,密码,备注",
+                        Toast.LENGTH_LONG
+                    ).show()
                     return
                 }
 
@@ -476,7 +493,8 @@ class PasswdActivity : AppCompatActivity() {
                 Toast.makeText(this, "无法读取文件", Toast.LENGTH_LONG).show()
             }
         } catch (e: SecurityException) {
-            Toast.makeText(this, "导入失败：没有存储权限，请在设置中授予存储权限", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "导入失败：没有存储权限，请在设置中授予存储权限", Toast.LENGTH_LONG)
+                .show()
         } catch (e: Exception) {
             Toast.makeText(this, "导入失败: ${e.message}", Toast.LENGTH_LONG).show()
         }
@@ -504,11 +522,13 @@ class PasswdActivity : AppCompatActivity() {
                         inQuotes = !inQuotes
                     }
                 }
+
                 char == ',' && !inQuotes -> {
                     // 逗号分隔符（不在引号内）
                     result.add(current.toString())
                     current.clear()
                 }
+
                 else -> {
                     current.append(char)
                 }
@@ -538,7 +558,8 @@ class PasswdActivity : AppCompatActivity() {
 
         try {
             // 获取用户默认下载目录
-            val exportDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val exportDir =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             if (!exportDir.exists()) {
                 exportDir.mkdirs()
             }
@@ -580,7 +601,8 @@ class PasswdActivity : AppCompatActivity() {
 
         try {
             // 获取用户默认下载目录
-            val exportDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val exportDir =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             if (!exportDir.exists()) {
                 exportDir.mkdirs()
             }
@@ -617,21 +639,30 @@ class PasswdActivity : AppCompatActivity() {
 
     private fun buildCsvContent(): String {
         val csv = StringBuilder()
+        csv.append("平台，账户，密码，备注\n")
 
-        // 添加标题行
-        csv.append("平台,账户,密码,备注\n")
-
-        // 添加数据行
         passwordList.forEach { item ->
-            csv.append("\"${item.platform.replace("\"", "\"\"")}\",")
-            csv.append("\"${item.account.replace("\"", "\"\"")}\",")
-            csv.append("\"${item.password.replace("\"", "\"\"")}\",")
-            csv.append("\"${item.note.replace("\"", "\"\"")}\"")
-            csv.append("\n")
-        }
+            val platform = escapeCsvField(item.platform)
+            val account = escapeCsvField(item.account)
+            val password = escapeCsvField(item.password)
+            val note = escapeCsvField(item.note)
 
+            csv.append("$platform,$account,$password,$note\n")
+        }
         return csv.toString()
     }
+
+    private fun escapeCsvField(field: String): String {
+        if (field.isEmpty()) return "\"\""
+        val isLongNumber = field.matches(Regex("\\d{11,}"))
+        val escapedField = field.replace("\"", "\"\"")
+        return if (isLongNumber) {
+            "\"\t$escapedField\""
+        } else {
+            "\"$escapedField\""
+        }
+    }
+
 
     private fun getFileName(uri: Uri): String? {
         var fileName: String? = null
@@ -689,7 +720,8 @@ class PasswdActivity : AppCompatActivity() {
                     passwordItem.note = note
 
                     // 更新过滤列表中的项
-                    val indexInFiltered = filteredPasswordList.indexOfFirst { it.id == passwordItem.id }
+                    val indexInFiltered =
+                        filteredPasswordList.indexOfFirst { it.id == passwordItem.id }
                     if (indexInFiltered != -1) {
                         filteredPasswordList[indexInFiltered] = passwordItem
                     }
@@ -706,7 +738,8 @@ class PasswdActivity : AppCompatActivity() {
                 // 只有在当前搜索条件下匹配才添加到过滤列表
                 if (binding.searchPwd.text.isEmpty() ||
                     newItem.platform.contains(binding.searchPwd.text, true) ||
-                    newItem.account.contains(binding.searchPwd.text, true)) {
+                    newItem.account.contains(binding.searchPwd.text, true)
+                ) {
                     filteredPasswordList.add(newItem)
                 }
             }
@@ -793,10 +826,12 @@ class PasswdActivity : AppCompatActivity() {
                                 showEditDialog(item)
                                 true
                             }
+
                             R.id.action_delete -> {
                                 deletePassword(item)
                                 true
                             }
+
                             else -> false
                         }
                     }
